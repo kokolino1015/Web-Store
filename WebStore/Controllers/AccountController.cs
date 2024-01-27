@@ -39,6 +39,7 @@ namespace WebStore.Controllers
             {
                 return View(model);
             }
+            Cart cart = new Cart();
             var user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -46,6 +47,7 @@ namespace WebStore.Controllers
                 EmailConfirmed = true,
                 LastName = model.LastName,
                 UserName = model.Email,
+                Cart = cart
             };
             var result = await userManager.CreateAsync(user, model.Password);
 

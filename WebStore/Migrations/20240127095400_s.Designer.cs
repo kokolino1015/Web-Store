@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebStore.Data;
@@ -11,9 +12,11 @@ using WebStore.Data;
 namespace WebStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127095400_s")]
+    partial class s
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,7 +203,7 @@ namespace WebStore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("integer")
                         .HasColumnName("cart_id");
 
@@ -304,9 +307,9 @@ namespace WebStore.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.HasKey("Id")
-                        .HasName("pk_carts");
+                        .HasName("pk_cart");
 
-                    b.ToTable("carts", (string)null);
+                    b.ToTable("cart", (string)null);
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Category", b =>
@@ -328,24 +331,9 @@ namespace WebStore.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("pk_categories");
+                        .HasName("pk_category");
 
-                    b.ToTable("categories", (string)null);
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id")
-                        .HasName("pk_payments");
-
-                    b.ToTable("payments", (string)null);
+                    b.ToTable("category", (string)null);
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Product", b =>
@@ -384,68 +372,15 @@ namespace WebStore.Migrations
                         .HasColumnName("is_deleted");
 
                     b.HasKey("Id")
-                        .HasName("pk_products");
+                        .HasName("pk_product");
 
                     b.HasIndex("CartId")
-                        .HasDatabaseName("ix_products_cart_id");
+                        .HasDatabaseName("ix_product_cart_id");
 
                     b.HasIndex("CategoryId")
-                        .HasDatabaseName("ix_products_category_id");
+                        .HasDatabaseName("ix_product_category_id");
 
-                    b.ToTable("products", (string)null);
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.Promotion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id")
-                        .HasName("pk_promotions");
-
-                    b.ToTable("promotions", (string)null);
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("text")
-                        .HasColumnName("owner_id");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer")
-                        .HasColumnName("product_id");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_deleted");
-
-                    b.HasKey("Id")
-                        .HasName("pk_reviews");
-
-                    b.HasIndex("OwnerId")
-                        .HasDatabaseName("ix_reviews_owner_id");
-
-                    b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_reviews_product_id");
-
-                    b.ToTable("reviews", (string)null);
+                    b.ToTable("product", (string)null);
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Role", b =>
@@ -462,24 +397,9 @@ namespace WebStore.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("pk_roles");
+                        .HasName("pk_role");
 
-                    b.ToTable("roles", (string)null);
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.Sale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id")
-                        .HasName("pk_sales");
-
-                    b.ToTable("sales", (string)null);
+                    b.ToTable("role", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -544,12 +464,14 @@ namespace WebStore.Migrations
                     b.HasOne("WebStore.Data.Entities.Cart", "Cart")
                         .WithMany()
                         .HasForeignKey("CartId")
-                        .HasConstraintName("fk_asp_net_users_carts_cart_id");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_asp_net_users_cart_cart_id");
 
                     b.HasOne("WebStore.Data.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_asp_net_users_roles_role_id");
+                        .HasConstraintName("fk_asp_net_users_role_role_id");
 
                     b.Navigation("Cart");
 
@@ -561,35 +483,16 @@ namespace WebStore.Migrations
                     b.HasOne("WebStore.Data.Entities.Cart", null)
                         .WithMany("Products")
                         .HasForeignKey("CartId")
-                        .HasConstraintName("fk_products_carts_cart_id");
+                        .HasConstraintName("fk_product_cart_cart_id");
 
                     b.HasOne("WebStore.Data.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_products_categories_category_id");
+                        .HasConstraintName("fk_product_category_category_id");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.Review", b =>
-                {
-                    b.HasOne("WebStore.Data.Entities.Account.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .HasConstraintName("fk_reviews_users_owner_id");
-
-                    b.HasOne("WebStore.Data.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_reviews_products_product_id");
-
-                    b.Navigation("Owner");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Cart", b =>

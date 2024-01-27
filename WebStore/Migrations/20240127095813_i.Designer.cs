@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebStore.Data;
@@ -11,9 +12,11 @@ using WebStore.Data;
 namespace WebStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127095813_i")]
+    partial class i
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,7 +203,7 @@ namespace WebStore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("integer")
                         .HasColumnName("cart_id");
 
@@ -544,6 +547,8 @@ namespace WebStore.Migrations
                     b.HasOne("WebStore.Data.Entities.Cart", "Cart")
                         .WithMany()
                         .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_asp_net_users_carts_cart_id");
 
                     b.HasOne("WebStore.Data.Entities.Role", "Role")

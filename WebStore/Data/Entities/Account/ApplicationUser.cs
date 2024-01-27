@@ -14,5 +14,6 @@ namespace WebStore.Data.Entities.Account
         public string? LastName { get; set; }
 
         public Role? Role { get; set; }
+        public Cart? Cart { get; set; }
     }
 }

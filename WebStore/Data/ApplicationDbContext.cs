@@ -1,6 +1,7 @@
 ﻿using WebStore.Data.Entities.Account;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Data.Entities;
 
 namespace WebStore.Data
 {
@@ -10,5 +11,13 @@ namespace WebStore.Data
             : base(options)
         {
         }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Sale> Sales { get; set; }
     }
 }

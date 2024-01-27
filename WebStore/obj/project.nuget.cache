@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "498XEmliweKRVNqwRiAgVI2FbLWmHsU4qh1U6129J8xVO8xEJw8ayRf3VufLEIVaRE9idojihamNkLPu7ZFspQ==",
+  "dgSpecHash": "CB49So4mkTxK6nkAUjimMbbekfx9kWhLgvNZ4axEH7oLQXBX3LyE67Rjt0+gGx0W2w92bjQ5uqnRq1f6ldZWPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\WebStore.csproj",
+  "projectFilePath": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nedel\\.nuget\\packages\\efcore.namingconventions\\7.0.2\\efcore.namingconventions.7.0.2.nupkg.sha512",
     "C:\\Users\\nedel\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

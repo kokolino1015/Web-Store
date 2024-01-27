@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\WebStore.csproj": {}
+    "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\WebStore.csproj": {
+    "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\WebStore.csproj",
+        "projectUniqueName": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj",
         "projectName": "WebStore",
-        "projectPath": "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\WebStore.csproj",
+        "projectPath": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj",
         "packagesPath": "C:\\Users\\nedel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\obj\\",
+        "outputPath": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

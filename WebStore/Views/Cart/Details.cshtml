@@ -1,0 +1,39 @@
+﻿@model WebStore.Models.CartViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="d-flex justify-content-center flex-wrap">
+    <div style="width: 50vw;">
+        <div class="card-body">
+            <div class="d-flex justify-content-center">
+                <h3>Products in cart</h3>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap">
+
+                @foreach (var product in Model.Products)
+                {
+                    <div class="card" style="width: 20rem;">
+                        <ul class="list-group list-group-flush">
+                            @*<li class="list-group-item">
+                        <span class="fw-bold">Category: </span> @Model.Name
+                        </li>*@
+                            <li class="list-group-item"><span class="fw-bold">Description: </span> @(product.Description?.Substring(0, Math.Min(product.Description.Length, 10)) + (product.Description?.Length > 10 ? "..." : ""))</li>
+                            <li class="list-group-item">
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"
+                                   class="btn btn-primary mb-2">View</a>
+                                @*@if (this.ViewBag.Owner == product.Owner)
+                                {
+                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"
+                                       class="btn btn-primary mb-2">Edit</a>
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                                       class="btn btn-primary mb-2">Delete</a>
+                                }*@
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

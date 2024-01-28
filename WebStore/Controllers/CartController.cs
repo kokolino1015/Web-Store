@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Models;
+using WebStore.Services;
 
 namespace WebStore.Controllers
 {
     public class CartController : Controller
     {
-        // GET: CartController
-        public ActionResult Index()
+        private readonly CartService cartService;
+        private readonly CommonService commonService;
+        public CartController(CartService _cartService, CommonService _commonService)
         {
-            return View();
+            cartService = _cartService;
+            commonService = _commonService;
         }
-
         // GET: CartController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            CartViewModel model = cartService.GetCartById(id);
+            return View(model);
         }
 
         // GET: CartController/Create

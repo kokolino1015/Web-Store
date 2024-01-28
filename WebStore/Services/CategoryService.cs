@@ -1,7 +1,7 @@
 ﻿using WebStore.Data;
 using WebStore.Data.Entities.Account;
 using WebStore.Data.Entities;
-using WebStore.Models.CatedoryModel;
+using WebStore.Models.CategoryModel;
 
 namespace WebStore.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace WebStore.Models.CatedoryModel
+﻿namespace WebStore.Models.CategoryModel
 {
     public class CategoryFormModel
     {

@@ -1,78 +1,111 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data.Entities.Account;
+using WebStore.Models.CategoryModel;
+using WebStore.Services;
 
 namespace WebStore.Controllers
 {
     public class CategoryController : Controller
-    {       
+    {
 
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
+        private readonly CategoryService categoryService;
+        private readonly CommonService commonService;
+        public CategoryController(CategoryService _categoryService, CommonService _commonService)
         {
-            return View();
+            categoryService = _categoryService;
+            commonService = _commonService;
         }
-
-        // GET: CategoryController/Create
-        public ActionResult Create()
+        [Authorize]
+        [HttpGet]
+        public IActionResult Create()
         {
-            return View();
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            //if (commonService.FindRole(User).Name != "employer")
+            //{
+            //    return Unauthorized();
+            //}
+            CategoryFormModel model = new CategoryFormModel();
+            return View(model);
         }
-
-        // POST: CategoryController/Create
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(CategoryFormModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            //if (commonService.FindRole(User).Name != "employer")
+            //{
+            //    return Unauthorized();
+            //}
+            categoryService.Create(model);
+            return RedirectToAction("Index", "Home");
         }
-
-        // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize]
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            return View();
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            return View(categoryService.GetCategoryById(id));
         }
-
-        // POST: CategoryController/Edit/5
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(CategoryFormModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            categoryService.Update(model);
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("All", "category");
         }
-
-        // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize]
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            return View();
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            return View(categoryService.GetCategoryById(id));
         }
-
-        // POST: CategoryController/Delete/5
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(CategoryFormModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            categoryService.Delete(model.Id);
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("All", "category");
+        }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            ViewBag.Owner = user;
+            var model = categoryService.GetCategoryById(id);
+            ViewBag.Products = categoryService.GetAllIdByCategoryId(id);
+
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult All()
+        {
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            //var user = commonService.FindUser(User);
+            //ViewBag.Owner = null;
+            //if (user != null)
+            //{
+            //    ViewBag.Role = commonService.FindRole(User).Name;
+            //    ViewBag.Owner = user;
+            //}
+            var categories = categoryService.GetAllCategories();
+            ViewBag.Categories = categories;
+            return View();
+
         }
     }
 }

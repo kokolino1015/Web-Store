@@ -2,6 +2,7 @@ using WebStore.Data.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
+using WebStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Account/Login";
 });
 
+builder.Services.AddScoped<ProductService, ProductService>();
+builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Data.Entities.Account;
 using WebStore.Data.Entities;
 using WebStore.Data;
-using WebStore.Models.Account;
+using WebStore.Models.AccountModel;
 
 namespace WebStore.Controllers
 {

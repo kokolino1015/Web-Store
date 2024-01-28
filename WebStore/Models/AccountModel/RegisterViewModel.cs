@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebStore.Models.Account
+namespace WebStore.Models.AccountModel
 {
     public class RegisterViewModel
     {

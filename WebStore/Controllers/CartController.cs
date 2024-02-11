@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data.Entities.Account;
 using WebStore.Models;
+using WebStore.Models.ProductModel;
 using WebStore.Services;
 
 namespace WebStore.Controllers
@@ -19,6 +21,13 @@ namespace WebStore.Controllers
         {
             CartViewModel model = cartService.GetCartById(id);
             return View(model);
+        }
+        public ActionResult Add(int id)
+        {
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            cartService.Add(id, user.Cart.Id);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: CartController/Create

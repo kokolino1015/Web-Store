@@ -1,1 +1,21 @@
-﻿
+﻿@model WebStore.Models.ProductModel.ProductFormModel
+
+@{
+    ViewBag.Title = "View Ad Details";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="d-flex justify-content-center flex-wrap">
+    <div class="card " style="width: 50vw;">
+        <div class="card-body">
+            <h2 class="card-title text-center">@ViewBag.Category</h2>
+            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"
+               class="btn btn-primary mb-2">Add to cart</a>
+            <p class="card-text"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-primary mb-2">Edit</a>
+            <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-primary mb-2">Delete</a>
+        </div>
+    </div>
+</div>

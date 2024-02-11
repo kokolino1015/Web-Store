@@ -1,6 +1,8 @@
 ﻿using WebStore.Data;
+using WebStore.Data.Entities;
 using WebStore.Models;
 using WebStore.Models.CategoryModel;
+using WebStore.Models.ProductModel;
 
 namespace WebStore.Services
 {
@@ -14,11 +16,26 @@ namespace WebStore.Services
         }
         public CartViewModel GetCartById(int id)
         {
-            return context.Carts.Where(x => x.Id == id).Select(cart => new CartViewModel
+            var model =  context.Carts.Where(x => x.Id == id).Select(cart => new CartViewModel
             {
                 Id = id,
                 Products = cart.Products,
             }).FirstOrDefault();
+            return model;
+        }
+        public void Add(int product, int id)
+        {
+            Cart cart = context.Carts.Where(x => x.Id == id).First();
+            Product _product = context.Products.Where(x => x.Id == product).First();
+            cart.Products.Add(_product);
+            context.Carts.Update(cart);
+        }
+        public void Remove(ProductFormModel product, int id)
+        {
+            Cart cart = context.Carts.Where(x => x.Id == id).First();
+            Product _product = context.Products.Where(x => x.Id == product.Id).First();
+            cart.Products.Remove(_product);
+            context.Carts.Update(cart);
         }
     }
 }

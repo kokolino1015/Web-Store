@@ -20,8 +20,10 @@ namespace WebStore.Services
         {
             Product product = new Product()
             {
+                Name = model.Name,
+                Price = model.Price,
                 Description = model.Description,
-                Category = context.Categories.Where(x => x.Id == model.Category.Id).FirstOrDefault(),
+                Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault(),
                 isDeleted = false
             };
             context.Products.Add(product);
@@ -35,9 +37,16 @@ namespace WebStore.Services
                 Name = x.Name,
             }).ToList();
         }
-        public Category GetCategoryById(int id)
+        public ProductFormModel GetProductById(int id)
         {
-            return context.Categories.Where(x => x.Id == id).FirstOrDefault();
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
+            {
+                Id = x.Id,
+                Name= x.Name, 
+                Price = x.Price, 
+                Description = x.Description, 
+                Category = x.Category.Id
+            }).FirstOrDefault();
         }
         public ProductFormModel GetAdById(int id)
         {
@@ -45,7 +54,7 @@ namespace WebStore.Services
             {
                 Id = id,
                 Description = product.Description,
-                Category = product.Category,
+                Category = product.Category.Id,
                 
             }).FirstOrDefault();
         }
@@ -54,7 +63,9 @@ namespace WebStore.Services
         {
             Product ad = context.Products.Find(model.Id);
             ad.Description = model.Description;
-            ad.Category = context.Categories.Where(x => x.Id == model.Category.Id).FirstOrDefault();
+            ad.Name = model.Name;
+            ad.Price = model.Price;
+            ad.Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault();
             this.context.SaveChanges();
         }
         public void Delete(int id)
@@ -69,8 +80,10 @@ namespace WebStore.Services
             return await context.Products.Take(10).Where(x => !x.isDeleted).Select(x => new ProductFormModel()
             {
                 Id = x.Id,
-                Category = x.Category,
-                Description = x.Description
+                Category = x.Category.Id,
+                Description = x.Description, 
+                Name = x.Name,
+                Price = x.Price,
             }).ToListAsync();
         }
     }

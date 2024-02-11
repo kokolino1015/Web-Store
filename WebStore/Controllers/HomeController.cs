@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using WebStore.Data.Entities.Account;
 using WebStore.Models;
+using WebStore.Models.ProductModel;
 using WebStore.Services;
 
 namespace WebStore.Controllers
@@ -11,20 +12,26 @@ namespace WebStore.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly CategoryService categoryService;
         private readonly CommonService commonService;
-        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService)
+        private readonly ProductService productService;
+        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService, ProductService productService)
         {
             _logger = logger;
             this.categoryService = categoryService;
             this.commonService = commonService;
+            this.productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+            if (user != null)
+            {
+                ViewBag.CartId = user.Cart.Id;
+            }
+            List<ProductFormModel> products = await productService.GetFirst10Ads();
+            ViewBag.Products = products;
             var categories = categoryService.GetAllCategories();
             ViewBag.Categories = categories;
-           
             return View();
         }
 

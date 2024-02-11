@@ -20,6 +20,5 @@ namespace WebStore.Data
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Sale> Sales { get; set; }
-        public DbSet<WebStore.Models.CategoryModel.CategoryFormModel>? CategoryFormModel { get; set; }
     }
 }

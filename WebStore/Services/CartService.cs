@@ -29,6 +29,7 @@ namespace WebStore.Services
             Product _product = context.Products.Where(x => x.Id == product).First();
             cart.Products.Add(_product);
             context.Carts.Update(cart);
+            context.SaveChanges();
         }
         public void Remove(ProductFormModel product, int id)
         {

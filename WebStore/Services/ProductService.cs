@@ -5,6 +5,7 @@ using WebStore.Models.ProductModel;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System.Security.Claims;
+using WebStore.Models.ReviewModel;
 
 namespace WebStore.Services
 {
@@ -44,7 +45,13 @@ namespace WebStore.Services
                 Id = x.Id,
                 Name= x.Name, 
                 Price = x.Price, 
-                Description = x.Description, 
+                Description = x.Description,
+                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y=> new Review
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Owner = y.Owner
+                }).ToList(),
                 Category = x.Category.Id
             }).FirstOrDefault();
         }

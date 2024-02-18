@@ -5,7 +5,7 @@
 namespace WebStore.Migrations
 {
     /// <inheritdoc />
-    public partial class e : Migration
+    public partial class initials : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

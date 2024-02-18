@@ -16,7 +16,7 @@ namespace WebStore.Controllers
             cartService = _cartService;
             commonService = _commonService;
         }
-        // GET: CartController/Details/5
+        
         public ActionResult Details(int id)
         {
             CartViewModel model = cartService.GetCartById(id);

@@ -12,8 +12,8 @@ using WebStore.Data;
 namespace WebStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240128161324_a")]
-    partial class a
+    [Migration("20240218124641_initials")]
+    partial class initials
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,6 +312,28 @@ namespace WebStore.Migrations
                     b.ToTable("carts", (string)null);
                 });
 
+            modelBuilder.Entity("WebStore.Data.Entities.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("integer")
+                        .HasColumnName("cart_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_cart_items");
+
+                    b.HasIndex("CartId")
+                        .HasDatabaseName("ix_cart_items_cart_id");
+
+                    b.ToTable("cart_items", (string)null);
+                });
+
             modelBuilder.Entity("WebStore.Data.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -360,10 +382,6 @@ namespace WebStore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("integer")
-                        .HasColumnName("cart_id");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
                         .HasColumnName("category_id");
@@ -388,9 +406,6 @@ namespace WebStore.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_products");
-
-                    b.HasIndex("CartId")
-                        .HasDatabaseName("ix_products_cart_id");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_products_category_id");
@@ -485,26 +500,6 @@ namespace WebStore.Migrations
                     b.ToTable("sales", (string)null);
                 });
 
-            modelBuilder.Entity("WebStore.Models.CategoryModel.CategoryFormModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_category_form_model");
-
-                    b.ToTable("category_form_model", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -579,13 +574,16 @@ namespace WebStore.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("WebStore.Data.Entities.Product", b =>
+            modelBuilder.Entity("WebStore.Data.Entities.CartItem", b =>
                 {
                     b.HasOne("WebStore.Data.Entities.Cart", null)
-                        .WithMany("Products")
+                        .WithMany("Items")
                         .HasForeignKey("CartId")
-                        .HasConstraintName("fk_products_carts_cart_id");
+                        .HasConstraintName("fk_cart_items_carts_cart_id");
+                });
 
+            modelBuilder.Entity("WebStore.Data.Entities.Product", b =>
+                {
                     b.HasOne("WebStore.Data.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -604,7 +602,7 @@ namespace WebStore.Migrations
                         .HasConstraintName("fk_reviews_users_owner_id");
 
                     b.HasOne("WebStore.Data.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -617,7 +615,12 @@ namespace WebStore.Migrations
 
             modelBuilder.Entity("WebStore.Data.Entities.Cart", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("WebStore.Data.Entities.Product", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

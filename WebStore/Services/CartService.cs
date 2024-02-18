@@ -16,27 +16,32 @@ namespace WebStore.Services
         }
         public CartViewModel GetCartById(int id)
         {
-            var model =  context.Carts.Where(x => x.Id == id).Select(cart => new CartViewModel
+            return context.Carts.Where(x => x.Id == id).Select(cart => new CartViewModel
             {
                 Id = id,
-                Products = cart.Products,
+                Items = cart.Items,
             }).FirstOrDefault();
-            return model;
         }
         public void Add(int product, int id)
         {
             Cart cart = context.Carts.Where(x => x.Id == id).First();
             Product _product = context.Products.Where(x => x.Id == product).First();
-            cart.Products.Add(_product);
+            CartItem cartItem = new CartItem
+            {
+                product = _product,
+                Quantity = 0
+            };  
+            context.CartItems.Add(cartItem);
+            cart.Items.Add(cartItem);
             context.Carts.Update(cart);
             context.SaveChanges();
         }
-        public void Remove(ProductFormModel product, int id)
-        {
-            Cart cart = context.Carts.Where(x => x.Id == id).First();
-            Product _product = context.Products.Where(x => x.Id == product.Id).First();
-            cart.Products.Remove(_product);
-            context.Carts.Update(cart);
-        }
+        //public void Remove(ProductFormModel product, int id)
+        //{
+        //    Cart cart = context.Carts.Where(x => x.Id == id).First();
+        //    Product _product = context.Products.Where(x => x.Id == product.Id).First();
+        //    cart.Items.Remove();
+        //    context.Carts.Update(cart);
+        //}
     }
 }

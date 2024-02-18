@@ -548,3 +548,7 @@ C:\Users\Kaloyan\Desktop\ИТ МОН\ИТ МОН 2023-24\WebStore\Web-Store\WebS
 C:\Users\Kaloyan\Desktop\ИТ МОН\ИТ МОН 2023-24\WebStore\Web-Store\WebStore\obj\Debug\net6.0\WebStore.pdb
 C:\Users\Kaloyan\Desktop\ИТ МОН\ИТ МОН 2023-24\WebStore\Web-Store\WebStore\obj\Debug\net6.0\WebStore.genruntimeconfig.cache
 C:\Users\Kaloyan\Desktop\ИТ МОН\ИТ МОН 2023-24\WebStore\Web-Store\WebStore\obj\Debug\net6.0\ref\WebStore.dll
+C:\Users\nedel\source\repos\webStore\WebStore\bin\Debug\net6.0\MailKit.dll
+C:\Users\nedel\source\repos\webStore\WebStore\bin\Debug\net6.0\MimeKit.dll
+C:\Users\nedel\source\repos\webStore\WebStore\bin\Debug\net6.0\NETCore.MailKit.dll
+C:\Users\nedel\source\repos\webStore\WebStore\bin\Debug\net6.0\BouncyCastle.Crypto.dll

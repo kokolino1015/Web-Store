@@ -38,6 +38,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ProductService, ProductService>();
 builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddScoped<CommonService, CommonService>();
+builder.Services.AddScoped<ReviewService, ReviewService>();
 builder.Services.AddScoped<CartService, CartService>();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();

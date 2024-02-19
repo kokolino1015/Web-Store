@@ -20,6 +20,7 @@ namespace WebStore.Controllers
         public ActionResult Details(int id)
         {
             CartViewModel model = cartService.GetCartById(id);
+
             return View(model);
         }
         public ActionResult Add(int id)

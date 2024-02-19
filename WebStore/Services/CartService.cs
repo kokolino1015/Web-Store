@@ -29,10 +29,10 @@ namespace WebStore.Services
             CartItem cartItem = new CartItem
             {
                 product = _product,
-                Quantity = 0
+                Quantity = 1
             };  
-            context.CartItems.Add(cartItem);
             cart.Items.Add(cartItem);
+            context.CartItems.Add(cartItem);
             context.Carts.Update(cart);
             context.SaveChanges();
         }

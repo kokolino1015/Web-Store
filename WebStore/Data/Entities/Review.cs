@@ -1,9 +1,13 @@
-﻿using WebStore.Data.Entities.Account;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Data.Entities.Account;
 
 namespace WebStore.Data.Entities
 {
     public class Review
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Description { get; set; }
         public ApplicationUser Owner { get; set; }

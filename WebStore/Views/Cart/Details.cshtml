@@ -23,6 +23,7 @@
                             <li class="list-group-item">
                                 <a asp-controller="Product" asp-action="Details" asp-route-id="@items.product.Id"
                                    class="btn btn-primary mb-2">View</a>
+                                <a class="btn btn-info" asp-controller="Cart" asp-action="Order" asp-route-id="@Model.Id"> Order</a>
                                 @*@if (this.ViewBag.Owner == product.Owner)
                                 {
                                     <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"

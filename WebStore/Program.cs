@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
 using WebStore.Services;
+using Stripe;
+using Stripe.Issuing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,13 +36,17 @@ builder.Services.AddSingleton(emailConfig);
 //builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 //
-
-builder.Services.AddScoped<ProductService, ProductService>();
+builder.Services.AddSingleton<ChargeService>(new ChargeService());
+builder.Services.AddSingleton<TransactionService>(new TransactionService());
+builder.Services.AddScoped<WebStore.Services.ProductService, WebStore.Services.ProductService>();
 builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddScoped<CommonService, CommonService>();
-builder.Services.AddScoped<ReviewService, ReviewService>();
+builder.Services.AddScoped<WebStore.Services.ReviewService, WebStore.Services.ReviewService>();
 builder.Services.AddScoped<CartService, CartService>();
 builder.Services.AddControllersWithViews();
+
+StripeConfiguration.SetApiKey(builder.Configuration["Stripe:TestSecretKey"]);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

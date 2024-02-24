@@ -11,7 +11,7 @@
         "projectName": "WebStore",
         "projectPath": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\WebStore.csproj",
         "packagesPath": "C:\\Users\\nedel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nedel\\source\\repos\\WebStore\\WebStore\\obj\\",
+        "outputPath": "C:\\Users\\nedel\\source\\repos\\webStore\\WebStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -86,6 +86,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[43.16.0, )"
             }
           },
           "imports": [

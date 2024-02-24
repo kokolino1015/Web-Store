@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebStore.Data;
@@ -12,9 +13,11 @@ using WebStore.Data;
 namespace WebStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240224143740_qii")]
+    partial class qii
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,13 +379,9 @@ namespace WebStore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric")
+                    b.Property<double>("Amount")
+                        .HasColumnType("double precision")
                         .HasColumnName("amount");
-
-                    b.Property<int>("AmountOfItems")
-                        .HasColumnType("integer")
-                        .HasColumnName("amount_of_items");
 
                     b.Property<int>("CartId")
                         .HasColumnType("integer")

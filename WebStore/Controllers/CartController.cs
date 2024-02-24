@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
+using WebStore.Data.Entities;
 using WebStore.Data.Entities.Account;
 using WebStore.Models;
 using WebStore.Models.ProductModel;
@@ -11,8 +13,11 @@ namespace WebStore.Controllers
     {
         private readonly CartService cartService;
         private readonly CommonService commonService;
-        public CartController(CartService _cartService, CommonService _commonService)
+        private readonly ChargeService chargeService;
+        private static Dictionary<int, PaymentModel> models = new Dictionary<int, PaymentModel>();
+        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService)
         {
+            chargeService = _chargeService;
             cartService = _cartService;
             commonService = _commonService;
         }
@@ -31,67 +36,33 @@ namespace WebStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: CartController/Create
-        public ActionResult Create()
+        [HttpGet("/Cart/Order/{id}")]
+        public IActionResult Order(int id)
         {
-            return View();
+            Payment payment = cartService.MakePayment(id);
+            PaymentModel paymentModel = cartService.MakePaymentModel(payment);
+            models[paymentModel.Id] = paymentModel;
+            return View(paymentModel);
         }
 
-        // POST: CartController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpPost("/Cart/Order/{id}")]
+        public IActionResult Order(int id, string stripeToken, string stripeEmail)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: CartController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            Dictionary<string,string> Metadata = cartService.GetPaymentById(id);
+            var options = new ChargeCreateOptions
+            {
+                Amount = (long)(models[id].Amount * 100),
+                Currency = "USD",
+                Description = models[id].Description,
+                Source = stripeToken,
+                ReceiptEmail = stripeEmail,
+                Metadata = Metadata
+            };
 
-        // POST: CartController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var charge = this.chargeService.Create(options);
 
-        // GET: CartController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CartController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Redirect("/");
         }
     }
 }

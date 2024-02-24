@@ -18,9 +18,10 @@
                             @*<li class="list-group-item">
                         <span class="fw-bold">Category: </span> @Model.Name
                         </li>*@
+                            <li class="list-group-item"><span class="fw-bold">Name: </span>@items.product.Name - @items.Quantity</li>
                             <li class="list-group-item"><span class="fw-bold">Description: </span> @(items.product.Description?.Substring(0, Math.Min(items.product.Description.Length, 10)) + (items.product.Description?.Length > 10 ? "..." : ""))</li>
                             <li class="list-group-item">
-                                <a asp-controller="Product" asp-action="Details" asp-route-id="@items.product.Description"
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@items.product.Id"
                                    class="btn btn-primary mb-2">View</a>
                                 @*@if (this.ViewBag.Owner == product.Owner)
                                 {

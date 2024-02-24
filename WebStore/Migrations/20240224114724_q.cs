@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WebStore.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class q : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,24 +123,6 @@ namespace WebStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "cart_items",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    cartid = table.Column<int>(name: "cart_id", type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_cart_items", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_cart_items_carts_cart_id",
-                        column: x => x.cartid,
-                        principalTable: "carts",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
                 {
@@ -200,6 +182,32 @@ namespace WebStore.Migrations
                         column: x => x.roleid,
                         principalTable: "roles",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "cart_items",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    productid = table.Column<int>(name: "product_id", type: "integer", nullable: false),
+                    quantity = table.Column<int>(type: "integer", nullable: false),
+                    cartid = table.Column<int>(name: "cart_id", type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_cart_items", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_cart_items_carts_cart_id",
+                        column: x => x.cartid,
+                        principalTable: "carts",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_cart_items_products_product_id",
+                        column: x => x.productid,
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,6 +373,11 @@ namespace WebStore.Migrations
                 name: "ix_cart_items_cart_id",
                 table: "cart_items",
                 column: "cart_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_cart_items_product_id",
+                table: "cart_items",
+                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_category_id",

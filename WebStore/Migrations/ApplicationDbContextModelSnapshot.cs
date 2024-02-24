@@ -322,11 +322,22 @@ namespace WebStore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("cart_id");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
                     b.HasKey("Id")
                         .HasName("pk_cart_items");
 
                     b.HasIndex("CartId")
                         .HasDatabaseName("ix_cart_items_cart_id");
+
+                    b.HasIndex("productId")
+                        .HasDatabaseName("ix_cart_items_product_id");
 
                     b.ToTable("cart_items", (string)null);
                 });
@@ -577,6 +588,15 @@ namespace WebStore.Migrations
                         .WithMany("Items")
                         .HasForeignKey("CartId")
                         .HasConstraintName("fk_cart_items_carts_cart_id");
+
+                    b.HasOne("WebStore.Data.Entities.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_cart_items_products_product_id");
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Product", b =>

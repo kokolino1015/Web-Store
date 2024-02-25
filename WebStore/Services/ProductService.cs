@@ -38,9 +38,9 @@ namespace WebStore.Services
                 Name = x.Name,
             }).ToList();
         }
-        public ProductFormModel GetProductById(int id)
+        public ProductViewModel GetProductById(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
             {
                 Id = x.Id,
                 Name= x.Name, 
@@ -52,7 +52,7 @@ namespace WebStore.Services
                     Description = y.Description,
                     Owner = y.Owner
                 }).ToList(),
-                Category = x.Category.Id
+                Category = x.Category.Name
             }).FirstOrDefault();
         }
         public ProductFormModel GetAdById(int id)

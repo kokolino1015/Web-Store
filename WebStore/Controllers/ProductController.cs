@@ -83,7 +83,7 @@ namespace WebStore.Controllers
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("All", "category");
         }
-        [HttpGet]
+        [HttpGet("/Product/Details/{id}")]
         public IActionResult Details(int id)
         {
             ApplicationUser user = commonService.FindUser(User);

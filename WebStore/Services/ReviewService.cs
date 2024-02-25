@@ -2,6 +2,7 @@
 using WebStore.Data;
 using WebStore.Models.ReviewModel;
 using WebStore.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore.Services
 {
@@ -34,26 +35,29 @@ namespace WebStore.Services
         }
         public ReviewViewModel GetModelForEditAndDelete(int id)
         {
-            Review review = context.Reviews.Where(x => x.Id == id).FirstOrDefault();
-            ReviewViewModel bookViewModel = new ReviewViewModel()
+            Review review = context.Reviews.Where(x => x.Id == id).Include(x=> x.Product).FirstOrDefault();
+            ReviewViewModel reviewModel = new ReviewViewModel()
             {
-                Description = review.Description
+                Description = review.Description,
+                Product = review.Product.Id
             };
-            return bookViewModel;
+            return reviewModel;
         }
-        public void Edit(ReviewViewModel model)
+        public int Edit(ReviewViewModel model)
         {
-            Review review = context.Reviews.Where(x => x.Id == model.Id).FirstOrDefault();
+            Review review = context.Reviews.Where(x => x.Id == model.Id).Include(x=> x.Product).FirstOrDefault();
             review.Description = model.Description;
             context.Reviews.Update(review);
             context.SaveChanges();
+            return review.Product.Id;
         }
-        public void Delete(ReviewViewModel model)
+        public int Delete(ReviewViewModel model)
         {
-            Review review = context.Reviews.Where(x=> x.Id == model.Id).FirstOrDefault();
+            Review review = context.Reviews.Where(x => x.Id == model.Id).Include(x => x.Product).FirstOrDefault();
             review.isDeleted = true;
             context.Reviews.Update(review);
             context.SaveChanges();
+            return review.Product.Id;
         }
     }
 }

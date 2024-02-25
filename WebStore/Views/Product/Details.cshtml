@@ -1,4 +1,4 @@
-﻿@model WebStore.Models.ProductModel.ProductFormModel
+﻿@model WebStore.Models.ProductModel.ProductViewModel
 
 @{
     ViewBag.Title = "View Product Details";
@@ -8,30 +8,35 @@
 <div class="d-flex justify-content-center flex-wrap">
     <div class="card " style="width: 50vw;">
         <div class="card-body">
-            <h2 class="card-title text-center">@ViewBag.Category</h2>
-            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"
-               class="btn btn-primary mb-2">Add to cart</a>
+            <h2 class="card-title text-center">@Model.Name</h2>
+            
             <p class="card-text"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <p class="card-text"><span class="fw-bold">Price: </span>@Model.Price $$</p>
+            <p class="card-text"><span class="fw-bold">Category: </span>@Model.Category </p>
             <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Edit</a>
             <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Delete</a>
-            <a asp-controller="Review" asp-action="Create" asp-route-id="@Model.Id"
-               class="btn btn-primary mb-2">Create review</a>
+            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"
+               class="btn btn-primary mb-2">Add to cart</a>
+            
 
         </div>
+        <a asp-controller="Review" asp-action="Create" asp-route-id="@Model.Id"
+           class="btn btn-primary mb-2">Create review</a>
         @foreach (var review in Model.Reviews)
         {
             <div class="card" style="width: 50vw;">
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush" style="list-style-type: none;">
                     <li class="list-group-item"><span class="fw-bold">Description: </span>@review.Description</li>
-                    @*<li class="list-group-item"><span class="fw-bold">Owner: </span>@review.Owner.FirstName</li>*@
                     
                     
-                        <a asp-controller="Review" asp-action="Edit" asp-route-id="@review.Id"
+                        <li><a asp-controller="Review" asp-action="Edit" asp-route-id="@review.Id"
                            class="btn btn-primary mb-2">Edit</a>
-                        <span></span>
-                        <a asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id" class="btn btn-danger mb-2">Delete</a>
+                    <a asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id" class="btn btn-danger mb-2">Delete</a></li>
+                    
+            
+                    
                     
                 </ul>
             </div>

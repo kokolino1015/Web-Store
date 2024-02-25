@@ -33,7 +33,7 @@ namespace WebStore.Controllers
         {
             ApplicationUser user = commonService.FindUser(User);
             reviewService.Add(model, user);
-            return Redirect($"Product/Details/{model.Product}");
+            return Redirect($"/Product/Details/{model.Product}");
         }
         [Authorize]
         [HttpGet]
@@ -44,8 +44,8 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(ReviewViewModel model)
         {
-            reviewService.Edit(model);
-            return RedirectToAction("Index", "Home");
+            int id = reviewService.Edit(model);
+            return Redirect($"/Product/Details/{id}");
         }
         [Authorize]
         [HttpGet]
@@ -57,9 +57,8 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Delete(ReviewViewModel model)
         {
-            
-            reviewService.Delete(model);
-            return RedirectToAction("Index", "Home");
+            int id = reviewService.Delete(model);
+            return Redirect($"/Product/Details/{id}");
         }
     }
 }

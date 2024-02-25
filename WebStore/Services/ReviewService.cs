@@ -26,7 +26,7 @@ namespace WebStore.Services
             Review review = new Review()
             {
                 Description = model.Description,
-                Owner = user,
+                Owner = user.Id,
                 Product = product,
             };
             context.Reviews.Add(review);

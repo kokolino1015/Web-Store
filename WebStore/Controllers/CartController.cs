@@ -33,7 +33,14 @@ namespace WebStore.Controllers
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
             cartService.Add(id, user.Cart.Id);
-            return RedirectToAction("Index", "Home");
+            return Redirect($"/Cart/Details/{user.Cart.Id}");
+        }
+        public ActionResult Remove(int id)
+        {
+            ApplicationUser user = commonService.FindUser(User);
+            ViewBag.CartId = user.Cart.Id;
+            cartService.Remove(id, user.Cart.Id);
+            return Redirect($"/Cart/Details/{user.Cart.Id}");
         }
 
         [HttpGet("/Cart/Order/{id}")]
@@ -48,7 +55,7 @@ namespace WebStore.Controllers
         [HttpPost("/Cart/Order/{id}")]
         public IActionResult Order(int id, string stripeToken, string stripeEmail)
         {
-
+            cartService.ClearCart(id);
             Dictionary<string,string> Metadata = cartService.GetPaymentById(id);
             var options = new ChargeCreateOptions
             {

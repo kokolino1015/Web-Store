@@ -105,12 +105,27 @@ namespace WebStore.Services
                 Label = $"Pay {payment.Amount}$"
             };
         }
-        //public void Remove(ProductFormModel product, int id)
-        //{
-        //    Cart cart = context.Carts.Where(x => x.Id == id).First();
-        //    Product _product = context.Products.Where(x => x.Id == product.Id).First();
-        //    cart.Items.Remove();
-        //    context.Carts.Update(cart);
-        //}
+        public void ClearCart(int id)
+        {
+            Payment payment = context.Payments.Where(x=> x.Id == id).Include(x=> x.Cart).FirstOrDefault();
+            Cart cart = context.Carts.Where(x => x.Id == payment.Cart.Id).Include(x => x.Items).First();
+            cart.Items.Clear();
+            context.Carts.Update(cart);
+            context.SaveChanges();
+        }
+        public void Remove(int product, int id)
+        {
+            Cart cart = context.Carts.Where(x => x.Id == id).Include(x => x.Items).First();
+            Product _product = context.Products.Where(x => x.Id == product).First();
+            var items = cart.Items;
+            var item = items.Where(x => x.product.Id == _product.Id).First();
+            item.Quantity -= 1;
+            if(item.Quantity == 0)
+            {
+                items.Remove(item);
+            }
+            context.Carts.Update(cart);
+            context.SaveChanges();
+        }
     }
 }

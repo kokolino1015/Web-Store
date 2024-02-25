@@ -10,7 +10,7 @@ namespace WebStore.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Description { get; set; }
-        public ApplicationUser Owner { get; set; }
+        public string Owner { get; set; }
         public Product Product { get; set; }
         public bool isDeleted { get; set; }
     }

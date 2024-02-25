@@ -33,7 +33,7 @@ namespace WebStore.Controllers
         {
             ApplicationUser user = commonService.FindUser(User);
             reviewService.Add(model, user);
-            return RedirectToAction("All", "Genre");
+            return Redirect($"Product/Details/{model.Product}");
         }
         [Authorize]
         [HttpGet]

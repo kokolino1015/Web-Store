@@ -1,0 +1,26 @@
+﻿@model WebStore.Models.AccountModel.AccountViewModel
+@{
+}
+
+<div class="d-flex justify-content-center flex-wrap">
+    <div class="card " style="width: 50vw;">
+        <div class="card-body">
+            <h2 class="card-title text-center">@Model.FirstName @Model.LastName</h2>
+
+            @*<p class="card-text"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <p class="card-text"><span class="fw-bold">Price: </span>@Model.Price $$</p>
+            <p class="card-text"><span class="fw-bold">Category: </span>@Model.Category </p>
+            <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-primary mb-2">Edit</a>
+            <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-primary mb-2">Delete</a>*@
+            <a asp-controller="Account" asp-action="Orders" asp-route-username="@Model.Username"
+               class="btn btn-primary mb-2">Orders</a>
+            <a asp-controller="Cart" asp-action="Details" asp-route-id="@Model.Cart.Id"
+               class="btn btn-primary mb-2">Cart</a>
+
+
+        </div>
+        
+    </div>
+</div>

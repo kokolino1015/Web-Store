@@ -24,6 +24,7 @@
         </div>
         <a asp-controller="Review" asp-action="Create" asp-route-id="@Model.Id"
            class="btn btn-primary mb-2">Create review</a>
+           <h2>Reviews</h2>
         @foreach (var review in Model.Reviews)
         {
             <div class="card" style="width: 50vw;">

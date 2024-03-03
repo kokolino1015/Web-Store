@@ -1,0 +1,16 @@
+﻿<div class="text-center">
+    <h1>Orders</h1>
+    @foreach (var order in ViewBag.Orders)
+    {
+        <div class="card" style="width: 20rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span class="fw-bold">Items: </span> @String.Join(", ", order.Items) </li>
+                <li class="list-group-item"><span class="fw-bold">Price: </span> @order.Amount $$</li>
+                <li class="list-group-item">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@order.Id"
+                        class="btn btn-primary mb-2">Details</a>
+                </li>
+            </ul>
+        </div>
+    }
+</div>

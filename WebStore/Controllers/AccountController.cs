@@ -7,6 +7,7 @@ using WebStore.Data;
 using WebStore.Services;
 using WebStore.Models.AccountModel;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Security.Claims;
 //using NETCore.MailKit.Core;
 
 namespace WebStore.Controllers
@@ -17,12 +18,15 @@ namespace WebStore.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext context;
         private readonly IEmailService emailService;
+        private readonly AccountService accountService;
         public AccountController(
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
             ApplicationDbContext context,
+            AccountService _accountService,
             IEmailService emailService)
         {
+            accountService = _accountService;
             userManager = _userManager;
             signInManager = _signInManager;
             this.context = context;
@@ -168,10 +172,20 @@ namespace WebStore.Controllers
             //TODO return view да се направи error view
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public IActionResult Details(string username)
+        {
 
+            return View(accountService.GetUser(username));
+        }
 
-
-
+        [HttpGet]
+        public async Task<IActionResult> Orders(string username)
+        {
+            var user = accountService.GetUser(username);
+            ViewBag.Orders = await accountService.GetLast10Orders(user.Cart.Id);
+            return View();
+        }
     }
 }
 

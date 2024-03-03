@@ -43,6 +43,7 @@ builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddScoped<CommonService, CommonService>();
 builder.Services.AddScoped<WebStore.Services.ReviewService, WebStore.Services.ReviewService>();
 builder.Services.AddScoped<CartService, CartService>();
+builder.Services.AddScoped<WebStore.Services.AccountService, WebStore.Services.AccountService>();
 builder.Services.AddControllersWithViews();
 
 StripeConfiguration.SetApiKey(builder.Configuration["Stripe:TestSecretKey"]);

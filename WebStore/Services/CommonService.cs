@@ -18,6 +18,7 @@ namespace WebStore.Services
             return context.Users.Where(x => x.Id == userId)
                 .Select(x => new ApplicationUser{
                     Id = x.Id,
+                    Email = x.Email,
                     UserName = x.UserName,
                     Cart = x.Cart
             })

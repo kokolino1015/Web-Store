@@ -8,6 +8,8 @@ using WebStore.Services;
 using WebStore.Models.AccountModel;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
+using Stripe;
+using WebStore.Models;
 //using NETCore.MailKit.Core;
 
 namespace WebStore.Controllers
@@ -18,12 +20,12 @@ namespace WebStore.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext context;
         private readonly IEmailService emailService;
-        private readonly AccountService accountService;
+        private readonly Services.AccountService accountService;
         public AccountController(
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
             ApplicationDbContext context,
-            AccountService _accountService,
+            Services.AccountService _accountService,
             IEmailService emailService)
         {
             accountService = _accountService;
@@ -186,6 +188,15 @@ namespace WebStore.Controllers
             ViewBag.Orders = await accountService.GetLast10Orders(user.Cart.Id);
             return View();
         }
+        [HttpGet("/Account/Order/Details/{id}")]
+        public IActionResult OrderDetails(int id)
+        {
+            Payment payment = accountService.GetOrder(id);
+            
+            return View(payment);
+        }
+
+        
     }
 }
 

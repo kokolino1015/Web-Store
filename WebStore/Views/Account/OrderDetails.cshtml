@@ -1,0 +1,16 @@
+﻿@model WebStore.Data.Entities.Payment
+@{
+}
+
+<div class="text-center">
+    
+        <div class="card" style="width: 20rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span class="fw-bold">Items: </span> @String.Join(", ", Model.Items) </li>
+                <li class="list-group-item"><span class="fw-bold">Price: </span> @Model.Amount $$</li>
+                @*<li class="list-group-item">
+                    @Model.
+                </li>*@
+            </ul>
+        </div
+</div>

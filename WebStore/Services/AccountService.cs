@@ -47,5 +47,17 @@ namespace WebStore.Services
                 Items = x.Items 
             }).ToListAsync();
         }
+        public Payment GetOrder(int id)
+        {
+            return context.Payments
+                .Where(x => x.Id == id)
+                .Select(x => new Payment()
+                {
+                    Id = x.Id,
+                    Amount = x.Amount,
+                    AmountOfItems = x.AmountOfItems,
+                    Items = x.Items
+                }).FirstOrDefault();
+        }
     }
 }

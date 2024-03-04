@@ -93,6 +93,18 @@ namespace WebStore.Services
             result[products] = payment.AmountOfItems.ToString();
             return result;
         }
+        public Payment GetPayment(int id)
+        {
+            return context.Payments
+                .Where(x => x.Id == id)
+                .Select(x => new Payment()
+                {
+                    Id = x.Id,
+                    Amount = x.Amount,
+                    AmountOfItems = x.AmountOfItems,
+                    Items = x.Items
+                }).FirstOrDefault();
+        }
         public PaymentModel MakePaymentModel(Payment payment)
         {
             return new PaymentModel()

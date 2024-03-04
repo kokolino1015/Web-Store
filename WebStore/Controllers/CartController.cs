@@ -14,12 +14,14 @@ namespace WebStore.Controllers
         private readonly CartService cartService;
         private readonly CommonService commonService;
         private readonly ChargeService chargeService;
+        private readonly IEmailService emailService;
         private static Dictionary<int, PaymentModel> models = new Dictionary<int, PaymentModel>();
-        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService)
+        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService)
         {
             chargeService = _chargeService;
             cartService = _cartService;
             commonService = _commonService;
+            this.emailService = emailService;
         }
         
         public ActionResult Details(int id)
@@ -55,7 +57,9 @@ namespace WebStore.Controllers
         [HttpPost("/Cart/Order/{id}")]
         public IActionResult Order(int id, string stripeToken, string stripeEmail)
         {
+            ApplicationUser user = commonService.FindUser(User);
             cartService.ClearCart(id);
+            Payment payment = cartService.GetPayment(id);
             Dictionary<string,string> Metadata = cartService.GetPaymentById(id);
             var options = new ChargeCreateOptions
             {
@@ -68,8 +72,14 @@ namespace WebStore.Controllers
             };
 
             var charge = this.chargeService.Create(options);
-
+            List<Stripe.Charge> transactions = this.chargeService.List().ToList();
+            string content = $"{@charge.Created} - "+ "**** **** **** "
+                + $"{charge.PaymentMethodDetails.Card.Last4}) - {string.Format("{0:F2}$", (charge.Amount / 100.0M))})\n"
+                + $"{String.Join(',', payment.Items)} - {payment.Amount}";
+            var message = new Message((new string[] { user.Email! }).ToList(), "Receipt", content);
+            emailService.SendEmail(message);
             return Redirect("/");
         }
+        
     }
 }

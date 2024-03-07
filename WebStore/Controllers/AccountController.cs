@@ -51,12 +51,23 @@ namespace WebStore.Controllers
             {
                 return View(model);
             }
+
+            //Check User Exist
+            var userExists = await userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
+            {
+                ViewData["Email"] = userExists.Email;
+                return View("UserAlreadyExists");
+            }
+            //
+
             Cart cart = new Cart();
             var user = new ApplicationUser()
             {
                 Email = model.Email,
                 FirstName = model.FirstName,
-                EmailConfirmed = true,
+                //SecurityStamp = Guid.NewGuid().ToString(),
+                //EmailConfirmed = true,
                 LastName = model.LastName,
                 UserName = model.Email,
                 Cart = cart
@@ -66,20 +77,19 @@ namespace WebStore.Controllers
 
             if (result.Succeeded)
             {
-                await signInManager.SignInAsync(user, isPersistent: false);
-
+                //await signInManager.SignInAsync(user, isPersistent: false);
+                // Signin in EmailVerification
 
                 //Add Token to Verify the email...
                 var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationLink = Url.Action(nameof(EmailVerification), "Account", new { token, email = user.Email }, Request.Scheme);
                 var message = new Message((new string[] { user.Email! }).ToList(), "Confirmation email link", confirmationLink!);
                 emailService.SendEmail(message);
-                //
-
 
                 //return RedirectToAction("Index", "Home");
                 ViewData["Email"] = user.Email;
                 return View("EmailVerification");
+                //
             }
 
             foreach (var item in result.Errors)
@@ -162,15 +172,11 @@ namespace WebStore.Controllers
                 var result = await userManager.ConfirmEmailAsync(user, token);
                 if (result.Succeeded)
                 {
-
-                    //return StatusCode(StatusCodes.Status200OK,
-                    //new Response { Status = "Success", Message = "Email Verified Successfully" });
-                    //TODO return view кое view да се върне
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
+                    //
                 }
             }
-            //return StatusCode(StatusCodes.Status500InternalServerError,
-            //new Response { Status = "Error", Message = "This user does not exist!" });
             //TODO return view да се направи error view
             return RedirectToAction("Index", "Home");
         }

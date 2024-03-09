@@ -14,11 +14,12 @@ using WebStore.Models;
 
 namespace WebStore.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext context;
+        private readonly CommonService commonService;
         private readonly IEmailService emailService;
         private readonly Services.AccountService accountService;
         public AccountController(
@@ -26,8 +27,10 @@ namespace WebStore.Controllers
             SignInManager<ApplicationUser> _signInManager,
             ApplicationDbContext context,
             Services.AccountService _accountService,
-            IEmailService emailService)
+            CommonService commonService,
+            IEmailService emailService):base(commonService)
         {
+            this.commonService = commonService; this.emailService = emailService;
             accountService = _accountService;
             userManager = _userManager;
             signInManager = _signInManager;

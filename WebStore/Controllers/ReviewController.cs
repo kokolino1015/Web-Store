@@ -11,11 +11,11 @@ using WebStore.Data.Entities;
 
 namespace WebStore.Controllers
 {
-    public class ReviewController : Controller
+    public class ReviewController : BaseController
     {
         private readonly CommonService commonService;
         private readonly ReviewService reviewService;
-        public ReviewController(CommonService commonService, ReviewService reviewService)
+        public ReviewController(CommonService commonService, ReviewService reviewService):base(commonService)
         {
             
             this.commonService = commonService;

@@ -9,14 +9,14 @@ using WebStore.Services;
 
 namespace WebStore.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly CartService cartService;
         private readonly CommonService commonService;
         private readonly ChargeService chargeService;
         private readonly IEmailService emailService;
         private static Dictionary<int, PaymentModel> models = new Dictionary<int, PaymentModel>();
-        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService)
+        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService): base(commonService:_commonService)
         {
             chargeService = _chargeService;
             cartService = _cartService;
@@ -76,7 +76,7 @@ namespace WebStore.Controllers
             string content = $"{@charge.Created} - "+ "**** **** **** "
                 + $"{charge.PaymentMethodDetails.Card.Last4}) - {string.Format("{0:F2}$", (charge.Amount / 100.0M))})\n"
                 + $"{String.Join(',', payment.Items)} - {payment.Amount}";
-            var message = new Message((new string[] { user.Email! }).ToList(), "Receipt", content);
+            var message = new Message((new string[] { stripeEmail! }).ToList(), "Receipt", content);
             emailService.SendEmail(message);
             return Redirect("/");
         }

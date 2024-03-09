@@ -7,12 +7,12 @@ using WebStore.Services;
 
 namespace WebStore.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
 
         private readonly CategoryService categoryService;
         private readonly CommonService commonService;
-        public CategoryController(CategoryService _categoryService, CommonService _commonService)
+        public CategoryController(CategoryService _categoryService, CommonService _commonService):base(commonService:_commonService)
         {
             categoryService = _categoryService;
             commonService = _commonService;
@@ -21,12 +21,7 @@ namespace WebStore.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
-            //if (commonService.FindRole(User).Name != "employer")
-            //{
-            //    return Unauthorized();
-            //}
+          
             CategoryFormModel model = new CategoryFormModel();
             return View(model);
         }

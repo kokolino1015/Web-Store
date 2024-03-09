@@ -7,27 +7,23 @@ using WebStore.Services;
 
 namespace WebStore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly CategoryService categoryService;
-        private readonly CommonService commonService;
+        private readonly CommonService _commonService;
         private readonly ProductService productService;
-        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService, ProductService productService)
+        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService, ProductService productService) : base(commonService: commonService)
         {
             _logger = logger;
             this.categoryService = categoryService;
-            this.commonService = commonService;
+            this._commonService = commonService;
             this.productService = productService;
         }
 
         public async Task<IActionResult> Index()
         {
-            ApplicationUser user = commonService.FindUser(User);
-            if (user != null)
-            {
-                ViewBag.CartId = user.Cart.Id;
-            }
+            
             List<ProductFormModel> products = await productService.GetFirst10Ads();
             ViewBag.Products = products;
             var categories = categoryService.GetAllCategories();
@@ -37,8 +33,7 @@ namespace WebStore.Controllers
 
         public IActionResult Privacy()
         {
-            ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+            
             return View();
         }
 

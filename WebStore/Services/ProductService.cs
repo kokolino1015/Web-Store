@@ -38,9 +38,9 @@ namespace WebStore.Services
                 Name = x.Name,
             }).ToList();
         }
-        public ProductViewModel GetProductById(int id)
+        public ProductFormModel GetProductById(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
             {
                 Id = x.Id,
                 Name= x.Name, 
@@ -52,17 +52,24 @@ namespace WebStore.Services
                     Description = y.Description,
                     Owner = y.Owner
                 }).ToList(),
-                Category = x.Category.Name
+                Category = x.Category.Id
             }).FirstOrDefault();
         }
-        public ProductFormModel GetAdById(int id)
+        public ProductViewModel GetProductDetails(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(product => new ProductFormModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
             {
-                Id = id,
-                Description = product.Description,
-                Category = product.Category.Id,
-                
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                Description = x.Description,
+                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y => new Review
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Owner = y.Owner
+                }).ToList(),
+                Category = x.Category.Name
             }).FirstOrDefault();
         }
         

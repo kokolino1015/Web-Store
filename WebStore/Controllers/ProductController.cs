@@ -18,6 +18,12 @@ namespace WebStore.Controllers
             productService = _productService;
             commonService = _commonService;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult Create()

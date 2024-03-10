@@ -17,6 +17,12 @@ namespace WebStore.Controllers
             categoryService = _categoryService;
             commonService = _commonService;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult Create()
@@ -41,7 +47,8 @@ namespace WebStore.Controllers
             //    return Unauthorized();
             //}
             categoryService.Create(model);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Create", "Category");
         }
         [Authorize]
         [HttpGet]

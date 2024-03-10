@@ -52,6 +52,22 @@ namespace WebStore.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed",
+                            ConcurrencyStamp = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "e0995bab-9f30-41b7-abc9-eccded60b9cc",
+                            ConcurrencyStamp = "9c28cf23-ac4a-4199-984c-0f03368d3336",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -163,6 +179,13 @@ namespace WebStore.Migrations
                         .HasDatabaseName("ix_asp_net_user_roles_role_id");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "906701bc-fe8a-490c-9791-2f584af87223",
+                            RoleId = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -293,6 +316,23 @@ namespace WebStore.Migrations
                         .HasDatabaseName("ix_asp_net_users_role_id");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "906701bc-fe8a-490c-9791-2f584af87223",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0fa26696-3ef1-4cf5-ba45-07de889153ce",
+                            Email = "admin@webshop.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN@WEBSHOP.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDb6xSUdWhDDYSx/0DLjrgkwsTxvb7y8zxybU7CMET1mvij7WG42pP6MIV5eWGrQiw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b3e7da81-a63c-42b5-860e-5b71cb1ff2e7",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@webshop.com"
+                        });
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Cart", b =>

@@ -1,0 +1,33 @@
+﻿@model WebStore.Models.AccountModel.AccountViewModel;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Users";
+}
+
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr>
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="FindUserByEmail" method="post">
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">User email</label>
+                <input asp-for="Username" class="form-control" aria-required="true" placeholder="Enter email" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <!--<button type="submit" class="btn btn-primary" style="width:auto">Search</button> -->
+                <input type="submit" class="btn btn-secondary mb-2" value="Search"></input>
+                <a asp-controller="Admin" asp-action="ListUsers" class="btn btn-secondary mb-2">Get All Users</a>
+                <a asp-controller="Admin" asp-action="SetRole" class="btn btn-secondary mb-2">Set Role to User</a>
+            </div>
+
+        </form>
+
+
+        <!-- <hr> -->
+        <!-- <h3 class="text-center">Create Role</h3> -->
+        <!-- <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Create" /></div> -->
+        <!-- <a asp-controller="Admin" asp-action="CreateRole" class="btn btn-primary mb-2">Create Role</a> -->
+    </div>
+</div>
+

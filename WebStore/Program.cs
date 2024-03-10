@@ -20,7 +20,15 @@ builder.Services.Configure<IdentityOptions>(options => options.SignIn.RequireCon
 //
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+/*
+// Temporary turn off EmailConfirmation
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+*/
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

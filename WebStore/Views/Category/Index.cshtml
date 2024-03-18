@@ -1,4 +1,5 @@
-﻿@model WebStore.Models.CategoryModel.CategoryFormModel;
+﻿
+@model WebStore.Models.CategoryModel.CategoryFormModel;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Search Category";
@@ -32,8 +33,9 @@
         </form>
 
         <hr> <!--???-->
-        <h3 class="text-center">Create Category</h3> <!--???-->
+        <h3 class="text-center">Category</h3> <!--???-->
         <!-- <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Create" /></div> To Do - Call Create view -->
-        <a asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">Create category</a>
+        <a asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">Create</a>
+        <a asp-controller="Category" asp-action="ListCategories" class="btn btn-primary mb-2">Get All</a>
     </div>
 </div>

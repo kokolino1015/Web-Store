@@ -50,7 +50,8 @@ namespace WebStore.Controllers
             //}
             
             productService.Create(model);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
         [Authorize]
         [HttpGet]

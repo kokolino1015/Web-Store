@@ -134,6 +134,13 @@ namespace WebStore.Controllers
 
                 if (result.Succeeded)
                 {
+                    //Check if logged user is admin then redirect to admin view
+                    bool isAdmin = await userManager.IsInRoleAsync(user, "Admin");
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    
                     if (model.ReturnUrl != null)
                     {
                         return Redirect(model.ReturnUrl);

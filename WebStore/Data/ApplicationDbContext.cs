@@ -49,7 +49,9 @@ namespace WebStore.Data
                 Email = "admin@webshop.com",
                 EmailConfirmed = true,
                 UserName = "admin@webshop.com",
-                NormalizedUserName = "ADMIN@WEBSHOP.COM"
+                NormalizedUserName = "ADMIN@WEBSHOP.COM",
+                //NormalizedEmail = "ADMIN@WEBSHOP.COM" // Cannot login without it
+                //Cart.Id = 1 ??? 
             };
             //Cart Id ????
 

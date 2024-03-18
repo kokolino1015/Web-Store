@@ -1,5 +1,6 @@
 ﻿@model WebStore.Models.CategoryModel.CategoryFormModel
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Create Category";
 }
 
@@ -14,7 +15,7 @@
                                                                                            aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Add" /></div>
+            <div class="mb-3"><input class="btn btn-primary mb-2" type="submit" value="Add" /></div>
         </form>
     </div>
 </div>

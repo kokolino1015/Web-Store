@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data.Entities.Account;
 using WebStore.Models.CategoryModel;
+using WebStore.Data.Entities;
 using WebStore.Services;
 
 namespace WebStore.Controllers
@@ -48,16 +50,19 @@ namespace WebStore.Controllers
             //}
             categoryService.Create(model);
             //return RedirectToAction("Index", "Home");
-            return RedirectToAction("Create", "Category");
+            //return RedirectToAction("Create", "Create");
+            return View("Edit", model);
         }
+
         [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
-            return View(categoryService.GetCategoryById(id));
+            return View(categoryService.GetCategoryById(idCat));
         }
+
         [Authorize]
         [HttpPost]
         public IActionResult Edit(CategoryFormModel model)
@@ -98,7 +103,7 @@ namespace WebStore.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult All()
+        public IActionResult ListCategories()
         {
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
@@ -109,9 +114,17 @@ namespace WebStore.Controllers
             //    ViewBag.Role = commonService.FindRole(User).Name;
             //    ViewBag.Owner = user;
             //}
-            var categories = categoryService.GetAllCategories();
-            ViewBag.Categories = categories;
-            return View();
+
+            List<Category> categories = categoryService.GetAllCategories();
+
+            List<CategoryFormModel> allCategories = categories
+                .Select(cat => new CategoryFormModel { Id = cat.Id, Name = cat.Name })
+                .ToList();
+
+            //ViewBag.Categories = categories;
+            //return View();
+
+            return View(allCategories);
 
         }
     }

@@ -19,18 +19,18 @@ namespace WebStore.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext context;
-        private readonly IEmailService emailService;
         private readonly CommonService commonService;
+        private readonly IEmailService emailService;
         private readonly Services.AccountService accountService;
         public AccountController(
-            CommonService _commonService,
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
             ApplicationDbContext context,
             Services.AccountService _accountService,
-            IEmailService emailService) : base(commonService: _commonService)
+            CommonService commonService,
+            IEmailService emailService):base(commonService)
         {
-            commonService = _commonService;
+            this.commonService = commonService; this.emailService = emailService;
             accountService = _accountService;
             userManager = _userManager;
             signInManager = _signInManager;
@@ -54,12 +54,23 @@ namespace WebStore.Controllers
             {
                 return View(model);
             }
+
+            //Check User Exist
+            var userExists = await userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
+            {
+                ViewData["Email"] = userExists.Email;
+                return View("UserAlreadyExists");
+            }
+            //
+
             Cart cart = new Cart();
             var user = new ApplicationUser()
             {
                 Email = model.Email,
                 FirstName = model.FirstName,
-                EmailConfirmed = true,
+                //SecurityStamp = Guid.NewGuid().ToString(),
+                //EmailConfirmed = true,
                 LastName = model.LastName,
                 UserName = model.Email,
                 Cart = cart
@@ -69,20 +80,19 @@ namespace WebStore.Controllers
 
             if (result.Succeeded)
             {
-                await signInManager.SignInAsync(user, isPersistent: false);
-
+                //await signInManager.SignInAsync(user, isPersistent: false);
+                // Signin in EmailVerification
 
                 //Add Token to Verify the email...
                 var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationLink = Url.Action(nameof(EmailVerification), "Account", new { token, email = user.Email }, Request.Scheme);
                 var message = new Message((new string[] { user.Email! }).ToList(), "Confirmation email link", confirmationLink!);
                 emailService.SendEmail(message);
-                //
-
 
                 //return RedirectToAction("Index", "Home");
                 ViewData["Email"] = user.Email;
                 return View("EmailVerification");
+                //
             }
 
             foreach (var item in result.Errors)
@@ -165,15 +175,11 @@ namespace WebStore.Controllers
                 var result = await userManager.ConfirmEmailAsync(user, token);
                 if (result.Succeeded)
                 {
-
-                    //return StatusCode(StatusCodes.Status200OK,
-                    //new Response { Status = "Success", Message = "Email Verified Successfully" });
-                    //TODO return view кое view да се върне
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
+                    //
                 }
             }
-            //return StatusCode(StatusCodes.Status500InternalServerError,
-            //new Response { Status = "Error", Message = "This user does not exist!" });
             //TODO return view да се направи error view
             return RedirectToAction("Index", "Home");
         }

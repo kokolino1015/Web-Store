@@ -8,10 +8,10 @@ namespace WebStore.Controllers
     {
         private readonly ChargeService chargeService;
         private readonly CommonService commonService;
-        public TransactionController(ChargeService chargeService, CommonService commonService):base(commonService)
+        public TransactionController(ChargeService chargeService, CommonService _commonService) : base(_commonService)
         {
+            commonService = _commonService;
             this.chargeService = chargeService;
-            this.commonService = commonService;
         }
 
         public IActionResult Index()

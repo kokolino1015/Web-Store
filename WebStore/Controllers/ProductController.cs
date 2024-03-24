@@ -12,17 +12,22 @@ namespace WebStore.Controllers
         private readonly ProductService productService;
         private readonly CommonService commonService;
         private readonly CategoryService categoryService;
-        public ProductController(ProductService _productService, CommonService _commonService, CategoryService _categoryService): base(commonService: _commonService)
+        public ProductController(ProductService _productService, CommonService _commonService, CategoryService _categoryService) : base(_commonService)
         {
             categoryService = _categoryService;
             productService = _productService;
             commonService = _commonService;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
-            
             ViewBag.Categories = productService.GetCategories();
             ProductFormModel model = new ProductFormModel();
             return View(model);
@@ -30,7 +35,7 @@ namespace WebStore.Controllers
         [Authorize]
         [HttpPost]
         public IActionResult Create(ProductFormModel model)
-        {            
+        {
             productService.Create(model);
             return RedirectToAction("Index", "Home");
         }
@@ -38,7 +43,6 @@ namespace WebStore.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-     
             ViewBag.Categories = categoryService.GetAllCategories();
             return View(productService.GetProductById(id));
         }
@@ -46,7 +50,6 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(ProductFormModel model)
         {
-            
             productService.Update(model);
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("All", "category");
@@ -55,14 +58,12 @@ namespace WebStore.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            
             return View(productService.GetProductById(id));
         }
         [Authorize]
         [HttpPost]
         public IActionResult Delete(CategoryFormModel model)
         {
-            
             productService.Delete(model.Id);
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("All", "category");

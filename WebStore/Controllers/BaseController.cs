@@ -8,10 +8,11 @@ namespace WebStore.Controllers
     public class BaseController : Controller
     {
         public readonly CommonService commonService;
-        
-        public BaseController(CommonService commonService)
-        {     
-            this.commonService = commonService;
+        public BaseController(CommonService _commonService)
+        {
+
+            commonService = _commonService;
+
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -22,8 +23,6 @@ namespace WebStore.Controllers
             {
                 ViewBag.CartId = user.Cart.Id;
             }
-            
         }
-
     }
 }

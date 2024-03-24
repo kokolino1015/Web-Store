@@ -16,7 +16,7 @@ namespace WebStore.Controllers
         private readonly ChargeService chargeService;
         private readonly IEmailService emailService;
         private static Dictionary<int, PaymentModel> models = new Dictionary<int, PaymentModel>();
-        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService): base(commonService:_commonService)
+        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService):base(_commonService)
         {
             chargeService = _chargeService;
             cartService = _cartService;
@@ -33,14 +33,14 @@ namespace WebStore.Controllers
         public ActionResult Add(int id)
         {
             ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+           
             cartService.Add(id, user.Cart.Id);
             return Redirect($"/Cart/Details/{user.Cart.Id}");
         }
         public ActionResult Remove(int id)
         {
             ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+            
             cartService.Remove(id, user.Cart.Id);
             return Redirect($"/Cart/Details/{user.Cart.Id}");
         }
@@ -76,7 +76,7 @@ namespace WebStore.Controllers
             string content = $"{@charge.Created} - "+ "**** **** **** "
                 + $"{charge.PaymentMethodDetails.Card.Last4}) - {string.Format("{0:F2}$", (charge.Amount / 100.0M))})\n"
                 + $"{String.Join(',', payment.Items)} - {payment.Amount}";
-            var message = new Message((new string[] { stripeEmail! }).ToList(), "Receipt", content);
+            var message = new Message((new string[] { user.Email! }).ToList(), "Receipt", content);
             emailService.SendEmail(message);
             return Redirect("/");
         }

@@ -11,13 +11,13 @@ namespace WebStore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly CategoryService categoryService;
-        private readonly CommonService _commonService;
+        private readonly CommonService commonService;
         private readonly ProductService productService;
-        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService, ProductService productService) : base(commonService: commonService)
+        public HomeController(ILogger<HomeController> logger, CategoryService categoryService, CommonService commonService, ProductService productService):base(commonService)
         {
             _logger = logger;
             this.categoryService = categoryService;
-            this._commonService = commonService;
+            this.commonService = commonService;
             this.productService = productService;
         }
 
@@ -33,7 +33,6 @@ namespace WebStore.Controllers
 
         public IActionResult Privacy()
         {
-            
             return View();
         }
 

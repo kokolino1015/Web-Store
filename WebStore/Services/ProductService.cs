@@ -38,9 +38,9 @@ namespace WebStore.Services
                 Name = x.Name,
             }).ToList();
         }
-        public ProductFormModel GetProductById(int id)
+        public ProductViewModel GetProductDetails(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
             {
                 Id = x.Id,
                 Name= x.Name, 
@@ -52,12 +52,12 @@ namespace WebStore.Services
                     Description = y.Description,
                     Owner = y.Owner
                 }).ToList(),
-                Category = x.Category.Id
+                Category = x.Category.Name
             }).FirstOrDefault();
         }
-        public ProductViewModel GetProductDetails(int id)
+        public ProductFormModel GetProductById(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -69,10 +69,11 @@ namespace WebStore.Services
                     Description = y.Description,
                     Owner = y.Owner
                 }).ToList(),
-                Category = x.Category.Name
+                Category = x.Category.Id
             }).FirstOrDefault();
         }
-        
+
+
         public void Update(ProductFormModel model)
         {
             Product ad = context.Products.Find(model.Id);

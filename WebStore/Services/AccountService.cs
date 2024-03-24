@@ -35,9 +35,9 @@ namespace WebStore.Services
         public async Task<IEnumerable<Payment>> GetLast10Orders(int CartId)
         {
             return await context.Payments
+                .OrderByDescending(x => x.Id)
                 .Take(10)
                 .Where(x => x.Cart.Id == CartId)
-                .OrderByDescending(x => x.Id)
                 //.Include(x => x.Items)
                 .Select(x => new Payment()
             {

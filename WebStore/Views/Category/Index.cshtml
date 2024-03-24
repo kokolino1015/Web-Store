@@ -1,0 +1,39 @@
+﻿@model WebStore.Models.CategoryModel.CategoryFormModel;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Search Category";
+}
+
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr>
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post" asp-controller="Category" asp-action="SearchCategory">
+            <div class="mb-3">                
+                <!-- <label asp-for="Id" class="form-label">ID</label> <input asp-for="Id" class="form-control" aria-required="true" />
+                <span asp-validation-for="Id" class="text-danger"></span> -->
+                <!-- Check validation with empty id or empty name -->
+
+                <!-- The <label> tag defines a label for several elements: -->
+
+               
+                <!-- <label asp-for="Name" class="form-label">Name</label> <input asp-for="Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span> -->
+
+                <label for="id" class="form-label">ID</label> <input id="id" type="number" name="id" class="form-control" />
+                <br />
+               
+                <h4 class="text-center">OR </h4>
+
+                <label for="sname" class="form-label">Name</label> <input id="sname" type="text" name="sname" class="form-control" />
+            </div>
+            <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Search" /></div>
+            <!-- To Do - Message for not found -->
+        </form>
+
+        <hr> <!--???-->
+        <h3 class="text-center">Create Category</h3> <!--???-->
+        <!-- <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Create" /></div> To Do - Call Create view -->
+        <a asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">Create category</a>
+    </div>
+</div>

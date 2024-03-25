@@ -1,5 +1,5 @@
-﻿@using WebStore.Models.CategoryModel;
-@model  IEnumerable<CategoryFormModel>;
+﻿@using WebStore.Models.CategoryModel
+@model  IEnumerable<CategoryFormModel>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "All Categories";
@@ -7,8 +7,8 @@
 <h3>All Categories</h3>
 @if (Model.Any())
 {
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="Create"
-       asp-controller="Category">Add New Category</a>
+    <a class="btn btn-primary mb-3" style="width:auto"
+       asp-controller="Category" asp-action="Create">Add New Category</a>
     foreach (var cat in Model)
     {
         <div class="card mb-0">
@@ -19,7 +19,7 @@
                 <p class="card-title">@cat.Name</p>
             </div>
             <div class="card-footer">
-                <form asp-action="DeleteRole" asp-route-catId="@cat.Id" method="post">
+                <form asp-action="Delete" asp-route-catId="@cat.Id" method="post">
                     <a asp-controller="Category" asp-action="Edit"
                        asp-route-catId="@cat.Id" class="btn btn-primary">Edit
                     </a>

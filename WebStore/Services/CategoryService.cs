@@ -40,7 +40,7 @@ namespace WebStore.Services
         }
         public void Delete(int id)
         {
-            var model = this.context.Categories.Find(id);
+            Category model = this.context.Categories.Find(id);
             model.IsDeleted = true;
             this.context.SaveChanges();
         }

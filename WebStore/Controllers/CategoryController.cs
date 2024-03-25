@@ -25,7 +25,7 @@ namespace WebStore.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,7 +38,7 @@ namespace WebStore.Controllers
             CategoryFormModel model = new CategoryFormModel();
             return View(model);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(CategoryFormModel model)
         {
@@ -51,16 +51,17 @@ namespace WebStore.Controllers
             categoryService.Create(model);
             //return RedirectToAction("Index", "Home");
             //return RedirectToAction("Create", "Create");
+
             return View("Edit", model);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int catId)
         {
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
-            return View(categoryService.GetCategoryById(idCat));
+            return View(categoryService.GetCategoryById(catId));
         }
 
         [Authorize]
@@ -70,17 +71,23 @@ namespace WebStore.Controllers
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
             categoryService.Update(model);
-            return RedirectToAction("Index", "Home");
-            //return RedirectToAction("All", "category");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("ListCategories", "category");
         }
         [Authorize]
-        [HttpGet]
-        public IActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult Delete(int catId)
         {
             ApplicationUser user = commonService.FindUser(User);
             ViewBag.CartId = user.Cart.Id;
-            return View(categoryService.GetCategoryById(id));
+            //return View(categoryService.GetCategoryById(catId));
+            
+            categoryService.Delete(catId);
+            //return View("ListCategories", ListCategories());
+            return RedirectToAction("ListCategories");
         }
+
+        /*
         [Authorize]
         [HttpPost]
         public IActionResult Delete(CategoryFormModel model)
@@ -91,6 +98,8 @@ namespace WebStore.Controllers
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("All", "category");
         }
+        */
+
         [HttpGet]
         public IActionResult Details(int id)
         {
@@ -119,6 +128,7 @@ namespace WebStore.Controllers
 
             List<CategoryFormModel> allCategories = categories
                 .Select(cat => new CategoryFormModel { Id = cat.Id, Name = cat.Name })
+                .OrderBy(cat => cat.Id)
                 .ToList();
 
             //ViewBag.Categories = categories;

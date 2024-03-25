@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data.Entities;
 using WebStore.Data.Entities.Account;
 using WebStore.Models.CategoryModel;
 using WebStore.Models.ProductModel;
@@ -21,10 +22,20 @@ namespace WebStore.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Category> categories = categoryService.GetAllCategories();
+
+            List<CategoryFormModel> allCategories = categories
+                .Select(cat => new CategoryFormModel { Id = cat.Id, Name = cat.Name })
+                .OrderBy(cat => cat.Id)
+                .ToList();
+
+            //ViewData["Categories"] = allCategories;
+            //return View();
+
+            return View(allCategories);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,7 +49,7 @@ namespace WebStore.Controllers
             ProductFormModel model = new ProductFormModel();
             return View(model);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(ProductFormModel model)
         {
@@ -53,7 +64,8 @@ namespace WebStore.Controllers
             //return RedirectToAction("Index", "Home");
             return RedirectToAction("Index", "Admin");
         }
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -62,7 +74,7 @@ namespace WebStore.Controllers
             ViewBag.Categories = categoryService.GetAllCategories();
             return View(productService.GetProductById(id));
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(ProductFormModel model)
         {
@@ -72,7 +84,7 @@ namespace WebStore.Controllers
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("All", "category");
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -80,7 +92,7 @@ namespace WebStore.Controllers
             ViewBag.CartId = user.Cart.Id;
             return View(productService.GetProductById(id));
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Delete(CategoryFormModel model)
         {
@@ -98,6 +110,32 @@ namespace WebStore.Controllers
             ViewBag.Owner = user;
             var model = productService.GetProductById(id);
             return View(model);
+        }
+
+
+        //[HttpPost]
+        //public IActionResult ListProdByCat(CategoryFormModel category)
+
+        [HttpPost]
+        public IActionResult ListProdByCat(int catId)
+        {
+            List<ProductFormModel> products = categoryService.
+                GetAllIdByCategoryId(catId)
+                .Select(p => new ProductFormModel 
+                { 
+                    Id=p.Id, 
+                    Name=p.Name, 
+                    Description=p.Description, 
+                    //Category=p.Category, 
+                    Price=p.Price,
+                    Reviews=p.Reviews
+                }).ToList();
+
+            ViewData["CategoryId"] = catId;
+            ViewData["CategoryName"] = categoryService.GetCategoryById(catId).Name;
+            ViewData["ProductsList"] = products;
+
+            return View();
         }
     }
 }

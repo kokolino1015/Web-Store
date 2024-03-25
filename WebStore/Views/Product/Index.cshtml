@@ -1,7 +1,9 @@
-﻿@model WebStore.Models.ProductModel.ProductFormModel
+﻿@using WebStore.Models.CategoryModel
+@model List<CategoryFormModel>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Search Product";
+    
 }
 
 <h3 class="text-center">@ViewData["Title"]</h3>
@@ -34,6 +36,30 @@
         <hr> <!--???-->
         <h3 class="text-center">Create Product</h3> <!--???-->
         <!-- <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Create" /></div> To Do - Call Create view -->
-        <a asp-controller="Product" asp-action="Create" class="btn btn-primary mb-2">Create Product</a>
+        <a asp-controller="Product" asp-action="Create" class="btn btn-primary mb-2">Create</a>
+
+        <h3 class="text-center">List Products By Category</h3> <!--???-->
+
+        <form asp-action="ListProdByCat" method="post">
+            <div class="mb-3">
+                <!--<label asp-for="Id" class="form-label">Select Category</label> -->
+                <!--<select asp-for="Id" class="form-control"> -->
+                <label class="form-label"> Select Category</label>
+                <select name="catId" class="form-control">
+                    @*@foreach (var category in ViewData["Categories"] as List<CategoryFormModel>)*@
+                    @foreach (var category in Model)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+
+                </select> 
+                <!--<span asp-validation-for="Id" class="text-danger"></span> -->
+            </div>
+            
+            <div class="mb-3">
+                <input class="btn btn-primary mb-2" type="submit" value="List" />
+             <a asp-controller="Product" asp-action="Index" class="btn btn-primary mb-2">Cancel</a>
+            </div>
+        </form>
     </div>
 </div>

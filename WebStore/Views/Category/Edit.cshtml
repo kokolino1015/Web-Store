@@ -8,15 +8,32 @@
 <hr />
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div class="mb-3">
-                <label asp-for="Name" class="form-label">Name</label> <input asp-for="Name"
-                                                                             class="form-control"
-                                                                             aria-required="true" />
+                <label asp-for="Id" class="form-label">Id</label>
+                <input asp-for="Id" hidden/>
+                <div>
+                    <input asp-for="Id" disabled class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                
+            </div>
+
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="mb-3"><input class="btn btn-primary mb-2" type="submit" value="Edit" /></div>
+            <div class="mb-3">
+                <input class="btn btn-primary mb-2" type="submit" value="Update" />
+                <a asp-action="ListCategories" class="btn btn-primary mb-2">Cancel</a>
+            </div>
         </form>
+        <div>
+            <a class="btn btn-primary mb-3" style="width:auto" 
+            asp-controller="Category" asp-action="Create">Add New Category</a>
+        </div>
     </div>
 </div>
 

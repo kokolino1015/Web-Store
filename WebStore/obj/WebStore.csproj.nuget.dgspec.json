@@ -85,6 +85,10 @@
             "Stripe.net": {
               "target": "Package",
               "version": "[43.16.0, )"
+            },
+            "bootstrap": {
+              "target": "Package",
+              "version": "[5.3.3, )"
             }
           },
           "imports": [

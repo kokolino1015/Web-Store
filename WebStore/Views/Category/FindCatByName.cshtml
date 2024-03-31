@@ -1,0 +1,68 @@
+﻿@model WebStore.Models.CategoryModel.CategoryFormModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Find Category by Name";
+}
+<h5 class="text-center text-primary font-weight-bold">Category</h5>
+<hr />
+
+@if (Model != null)
+{
+    <div class="mb-3 w-50 mx-auto">
+        <div class="card mb-3">
+            <!-- <div class="card-header">
+                Role Id : @Model.Id
+            </div> -->
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-controller="Category" asp-action="Delete" asp-route-catId="@Model.Id" method="post">
+                    <a asp-controller="Category" asp-action="Edit" asp-route-catId="@Model.Id" class="btn btn-primary">Edit</a>
+                    <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+                        <span>Are you sure you want to Delete?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@Model.Id', false)">No</a>
+                    </span>
+                    <span id="deleteSpan_@Model.Id">
+                        <a href="#" class="btn btn-danger"
+                           onclick="confirmDelete('@Model.Id', true)">Delete</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+
+
+        <a class="btn btn-primary mb-3" style="width:auto" asp-action="Create" asp-controller="Category">Add New Category</a>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-primary mb-3" style="float: right">Back</a>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No such category
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a category
+            </h5>
+            <a class="btn btn-primary" style="width:auto" asp-controller="Category" asp-action="Create">Create Category</a>
+        </div>
+    </div>
+}
+
+<script>
+    function confirmDelete(uniqueId, isTrue) {
+        var deleteSpan = 'deleteSpan_' + uniqueId;
+        var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+        if (isTrue) {
+            $('#' + deleteSpan).hide();
+            $('#' + confirmDeleteSpan).show();
+        } else {
+            $('#' + deleteSpan).show();
+            $('#' + confirmDeleteSpan).hide();
+        }
+    }
+</script>

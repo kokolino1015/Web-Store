@@ -1,80 +1,80 @@
 ﻿@using WebStore.Models.ProductModel
-@model ProductFormModel
+@model List<ProductFormModel>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "List Products By Category";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+    //var products = ViewData["ProductsList"] as List<ProductFormModel>;
 }
 
-<h5 class="text-center">@ViewData["Title"]:</h5>
-<h5 class="text-center">@ViewData["CategoryName"]</h5>
+<h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]:</h5>
+<h5 class="text-center text-dark font-weight-bold">@ViewData["CategoryName"]</h5>
+<hr />  <!-- Horizontal row for separation -->
 
-<table id="tblProducts" class="table" cellpadding="0" cellspacing="0">
-    <tr>
-        <th style="width:100px">Product Id</th>
-        <th style="width:150px">Name</th>
-        <th style="width:150px">Description</th>
-        <th style="width:100px">Price</th>
-        <th style="width:100px">Reviews</th>
-    </tr>
-    @foreach (var product in ViewData["ProductsList"] as List<ProductFormModel>)
-    {
-        <tr>
-            <td class="ProductId">
-                <span>@product.Id</span>
-            </td>
-            <td class="Name">
-                <span>@product.Name</span>
-                <input type="text" value="@product.Name" style="display:none" />
-            </td>
-            <td class="Description">
-                <span>@product.Description</span>
-                <input type="text" value="@product.Description" style="display:none" />
-            </td>
-            <td class="Price">
-                <span>@product.Price</span>
-                <input type="number" step="0.01" value="@product.Price" style="display:none" />
-            </td>
-            <td class="Reviews">
-                <span>@product.Reviews.Count()</span>
-                <input type="number" value="@product.Price" style="display:none" />
-            </td>
-            <td>
-                <a class="Edit" href="javascript:;">Edit</a>
-                <a class="Update" href="javascript:;" style="display:none">Update</a>
-                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-                <a class="Delete" href="javascript:;">Delete</a>
-            </td>
+@if (!string.IsNullOrWhiteSpace(@successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>@successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div> 
+}
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div> 
+}
+
+<form>
+    <button asp-controller="Product" asp-action="Create" class="btn btn-primary mb-1">Create Product</button>
+    <button asp-controller="Product" asp-action="Index" class="btn btn-primary mb-1" style="float: right">Back</button>
+    <!-- To Do Add Back button -->
+<table class="table table-responsive table-hover table-bordered">
+    <thead>
+        <tr class="table-active">
+            <th class="text-center">Id</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Reviews</th>
+            <th class="text-center">Actions</th>
         </tr>
-    }
-</table>
-
-<h5 class="text-center">Add Product</h5>
-
-<form asp-action="Create" method="post">
-<table border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td style="width: 150px">
-            Name<br />
-            <!-- <input type="text" id="txtName" style="width:140px" /> -->
-            <input asp-for="Name" style="width:140px" aria-required="true" />
-        </td>
-        <td style="width: 150px">
-            Description:<br />
-            <!-- <input type="text" id="txtDescription" style="width:140px" /> -->
-            <input asp-for="Description" style="width:140px" aria-required="true" />
-        </td>
-        <td style="width: 150px">
-             Price:<br />
-             <!-- <input type="number" step="0.01" id="numPrice" style="width:140px" /> -->
-             <input asp-for="Description" style="width:140px" aria-required="true" />
-        </td>
-
-        <input asp-for="Category" type="hidden" value=@ViewData["CategoryId"] />
-
-        <td style="width: 200px">
-            <br />
-                <input type="button" id="btnAdd" class="btn btn-primary mb-0" value="Add" />
-        </td>
-    </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (ProductFormModel product in Model)
+            {
+                <tr>
+                    <td class="text-center">@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td class="text-end">@product.Price</td>
+                    <td class="text-center">@product.Reviews.Count()</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                            <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" 
+                            class="btn btn-primary">Edit</a>
+                            <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                            class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    <div>
+                        No products available at this category!
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 </form>

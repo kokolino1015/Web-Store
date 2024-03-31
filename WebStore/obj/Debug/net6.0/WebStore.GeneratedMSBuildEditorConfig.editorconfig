@@ -100,6 +100,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Category/FindCatByName.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRmluZENhdEJ5TmFtZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -142,6 +146,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Product/ListProdByCat.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxMaXN0UHJvZEJ5Q2F0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Product/ListProdByName.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxMaXN0UHJvZEJ5TmFtZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Review/Create.cshtml]

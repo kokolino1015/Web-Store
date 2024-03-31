@@ -52,7 +52,7 @@ namespace WebStore.Controllers
             //return RedirectToAction("Index", "Home");
             //return RedirectToAction("Create", "Create");
 
-            return View("Edit", model);
+            return RedirectToAction("ListCategories");
         }
 
         [Authorize(Roles = "Admin")]
@@ -64,7 +64,8 @@ namespace WebStore.Controllers
             return View(categoryService.GetCategoryById(catId));
         }
 
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(CategoryFormModel model)
         {
@@ -72,9 +73,12 @@ namespace WebStore.Controllers
             ViewBag.CartId = user.Cart.Id;
             categoryService.Update(model);
             //return RedirectToAction("Index", "Home");
-            return RedirectToAction("ListCategories", "category");
+            //return RedirectToAction("ListCategories", "category");
+            return RedirectToAction("ListCategories");
         }
-        [Authorize]
+
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Delete(int catId)
         {
@@ -136,6 +140,13 @@ namespace WebStore.Controllers
 
             return View(allCategories);
 
+        }
+
+        [HttpPost]
+        public IActionResult FindCatByName(string name)
+        {
+            CategoryFormModel category = categoryService.GetCatByName(name);
+            return View(category);
         }
     }
 }

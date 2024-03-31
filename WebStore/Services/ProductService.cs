@@ -43,10 +43,10 @@ namespace WebStore.Services
             return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
             {
                 Id = x.Id,
-                Name= x.Name, 
-                Price = x.Price, 
+                Name = x.Name,
+                Price = x.Price,
                 Description = x.Description,
-                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y=> new Review
+                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y => new Review
                 {
                     Id = y.Id,
                     Description = y.Description,
@@ -59,13 +59,15 @@ namespace WebStore.Services
         {
             return context.Products.Where(x => x.Id == id).Select(product => new ProductFormModel
             {
-                Id = id,
+                Id = product.Id,
+                Name = product.Name,
                 Description = product.Description,
                 Category = product.Category.Id,
-                
+                Price = product.Price
+
             }).FirstOrDefault();
         }
-        
+
         public void Update(ProductFormModel model)
         {
             Product ad = context.Products.Find(model.Id);
@@ -81,17 +83,33 @@ namespace WebStore.Services
             model.isDeleted = true;
             this.context.SaveChanges();
         }
-        
+
         public async Task<List<ProductFormModel>> GetFirst10Ads()
         {
             return await context.Products.Take(10).Where(x => !x.isDeleted).Select(x => new ProductFormModel()
             {
                 Id = x.Id,
                 Category = x.Category.Id,
-                Description = x.Description, 
+                Description = x.Description,
                 Name = x.Name,
                 Price = x.Price,
             }).ToListAsync();
+        }
+
+        public List<ProductFormModel> GetProductByName(string productName)
+        {
+            List<ProductFormModel> products = context.Products
+                .Where(p => p.Name == productName && !p.isDeleted)
+                .Select(x => new ProductFormModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Category = x.Category.Id,
+                Price = x.Price,
+                Reviews = x.Reviews
+            }).ToList(); 
+            return products;
         }
     }
 }

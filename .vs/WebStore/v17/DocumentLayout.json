@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\listprodbycat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\product\\listprodbycat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\product\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -15,16 +19,20 @@
       "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\admin\\createrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\admin\\createrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\models\\productmodel\\productformmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\models\\productmodel\\productformmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,14 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\models\\productmodel\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\models\\productmodel\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|solutionrelative:webstore\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FDB2EB22-3441-4C25-BB30-B66F3C012A13}|WebStore\\WebStore.csproj|c:\\users\\mario\\desktop\\vs\\webstoreemail\\web-store\\webstore\\views\\category\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -78,8 +78,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 10,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Delete.cshtml",
+              "RelativeDocumentMoniker": "WebStore\\Views\\Product\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Delete.cshtml",
+              "RelativeToolTip": "WebStore\\Views\\Product\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-29T09:28:19.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebStore\\Views\\Product\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Edit.cshtml",
+              "RelativeToolTip": "WebStore\\Views\\Product\\Edit.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAD8AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-29T08:12:26.978Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -98,80 +124,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateRole.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Admin\\CreateRole.cshtml",
-              "RelativeDocumentMoniker": "WebStore\\Views\\Admin\\CreateRole.cshtml",
-              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Admin\\CreateRole.cshtml",
-              "RelativeToolTip": "WebStore\\Views\\Admin\\CreateRole.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-25T14:11:13.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ListProdByCat.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\ListProdByCat.cshtml",
-              "RelativeDocumentMoniker": "WebStore\\Views\\Product\\ListProdByCat.cshtml",
-              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\ListProdByCat.cshtml",
-              "RelativeToolTip": "WebStore\\Views\\Product\\ListProdByCat.cshtml",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEsAAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-20T13:58:02.392Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Create.cshtml",
               "RelativeDocumentMoniker": "WebStore\\Views\\Product\\Create.cshtml",
               "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Create.cshtml",
               "RelativeToolTip": "WebStore\\Views\\Product\\Create.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACcAAAAzAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADoAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-20T11:29:33.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "WebStore\\Controllers\\ProductController.cs",
               "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Controllers\\ProductController.cs",
               "RelativeToolTip": "WebStore\\Controllers\\ProductController.cs",
-              "ViewState": "AQIAAGcAAAAAAAAAAADwv4cAAAAwAAAA",
+              "ViewState": "AQIAAHcAAAAAAAAAAAAQwKQAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-20T11:07:40.991Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebStore\\Views\\Product\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Index.cshtml",
-              "RelativeToolTip": "WebStore\\Views\\Product\\Index.cshtml",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACYAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-20T11:06:08.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ProductViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Models\\ProductModel\\ProductViewModel.cs",
-              "RelativeDocumentMoniker": "WebStore\\Models\\ProductModel\\ProductViewModel.cs",
-              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Models\\ProductModel\\ProductViewModel.cs",
-              "RelativeToolTip": "WebStore\\Models\\ProductModel\\ProductViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-20T11:46:21.039Z"
             },
             {
               "$type": "Document",
@@ -181,7 +156,7 @@
               "RelativeDocumentMoniker": "WebStore\\Models\\ProductModel\\ProductFormModel.cs",
               "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Models\\ProductModel\\ProductFormModel.cs",
               "RelativeToolTip": "WebStore\\Models\\ProductModel\\ProductFormModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-20T14:07:27.837Z",
               "EditorCaption": ""
@@ -189,6 +164,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "WebStore\\Services\\ProductService.cs",
+              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Services\\ProductService.cs",
+              "RelativeToolTip": "WebStore\\Services\\ProductService.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAowDwAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-20T11:26:32.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebStore\\Views\\Product\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "WebStore\\Views\\Product\\Index.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAACgAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-20T11:06:08.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "WebStore\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "WebStore\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAOQAAAAAAAAAAAA4wAYBAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-27T13:55:15.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "CategoryService.cs",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Services\\CategoryService.cs",
               "RelativeDocumentMoniker": "WebStore\\Services\\CategoryService.cs",
@@ -196,12 +209,11 @@
               "RelativeToolTip": "WebStore\\Services\\CategoryService.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwC0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T12:50:15.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-18T12:50:15.969Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ListCategories.cshtml",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Category\\ListCategories.cshtml",
               "RelativeDocumentMoniker": "WebStore\\Views\\Category\\ListCategories.cshtml",
@@ -213,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "WebStore\\Controllers\\CategoryController.cs",
@@ -226,25 +238,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "WebStore\\Services\\ProductService.cs",
-              "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Services\\ProductService.cs",
-              "RelativeToolTip": "WebStore\\Services\\ProductService.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAswAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-20T11:26:32.142Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 11,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Category\\Edit.cshtml",
               "RelativeDocumentMoniker": "WebStore\\Views\\Category\\Edit.cshtml",
               "ToolTip": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\Views\\Category\\Edit.cshtml",
               "RelativeToolTip": "WebStore\\Views\\Category\\Edit.cshtml",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACIAAABOAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAIBJwCIAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-03-18T10:50:09.288Z"
             },

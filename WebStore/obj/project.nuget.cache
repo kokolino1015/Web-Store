@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "La73fLX7oKBa8CDZSPhnCq5hfGgKOMKAAQVcBTGRe4xiOhsUGPKvXtPrSIuU3gEmFpzuYsrSMkAW0b2kOwBHHw==",
+  "dgSpecHash": "cwZvga/mp/xmE3tly0Y0/uHZygdYPVOjv9XCWPQ9hC91DOfhW1lCP/mXx0X+S8FaAmsFNtVoz6IYSKp6Eb8IBQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kaloyan\\Desktop\\ИТ МОН\\ИТ МОН 2023-24\\WebStoreEmail\\Web-Store\\WebStore\\WebStore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Kaloyan\\.nuget\\packages\\bootstrap\\5.3.3\\bootstrap.5.3.3.nupkg.sha512",
     "C:\\Users\\Kaloyan\\.nuget\\packages\\efcore.namingconventions\\7.0.2\\efcore.namingconventions.7.0.2.nupkg.sha512",
     "C:\\Users\\Kaloyan\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Kaloyan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -4,38 +4,47 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Edit Category";
 }
-<h2 class="text-center">@ViewBag.Title</h2>
+<h5 class="text-center text-primary font-weight-bold">@ViewBag.Title</h5>
 <hr />
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form asp-action="Edit" method="post">
-            <div class="mb-3">
-                <label asp-for="Id" class="form-label">Id</label>
-                <input asp-for="Id" hidden/>
-                <div>
-                    <input asp-for="Id" disabled class="form-control" />
-                    <span asp-validation-for="Id" class="text-danger"></span>
-                </div>
-                
-            </div>
 
-
-            <div class="mb-3">
-                <label asp-for="Name" class="form-label">Name</label>
-                <input asp-for="Name" class="form-control" aria-required="true" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <input class="btn btn-primary mb-2" type="submit" value="Update" />
-                <a asp-action="ListCategories" class="btn btn-primary mb-2">Cancel</a>
-            </div>
-        </form>
-        <div>
-            <a class="btn btn-primary mb-3" style="width:auto" 
-            asp-controller="Category" asp-action="Create">Add New Category</a>
+<div class="mb-3 w-50 mx-auto">      
+    <form asp-action="Edit" method="post">           
+        <div class="mb-3">                
+            <label asp-for="Id" class="form-label text-primary">Id</label>
+            <input asp-for="Id" hidden/>                
+            <div>                    
+                <input asp-for="Id" disabled class="form-control" />                   
+                <span asp-validation-for="Id" class="text-danger"></span>                
+            </div>  
+            
+            
         </div>
-    </div>
+            
+        <div class="mb-3">               
+            <label asp-for="Name" class="form-label text-primary">Name</label>
+            <input asp-for="Name" class="form-control" aria-required="true" />                
+            <span asp-validation-for="Name" class="text-danger"></span>            
+        </div>
+            
+        <div class="mb-3">                
+            <input class="btn btn-success mb-2" type="submit" value="Update" />               
+            <a asp-action="ListCategories" class="btn btn-primary mb-2" style="float: right">Cancel</a>
+        </div>        
+    </form>
+        
 </div>
+
+<h5 class="text-center text-primary font-weight-bold">Create category</h5>
+<hr />
+
+<div class="mb-3 text-center mx-auto">
+        
+    <a class="btn btn-primary mb-3"             
+        
+    asp-controller="Category" asp-action="Create">Add New</a>       
+    
+</div>   
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

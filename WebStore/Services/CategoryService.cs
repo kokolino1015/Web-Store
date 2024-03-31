@@ -55,5 +55,13 @@ namespace WebStore.Services
         {
             return context.Categories.Where(x => !x.IsDeleted).ToList();
         }
+
+        public CategoryFormModel GetCatByName(string categoryName)
+        {
+            return context.Categories
+                .Where(x => !x.IsDeleted && x.Name == categoryName)
+                .Select(c => new CategoryFormModel { Id = c.Id, Name = c.Name })
+                .FirstOrDefault();
+        }
     }
 }

@@ -1,0 +1,87 @@
+﻿@using WebStore.Data.Entities
+@using WebStore.Models.ProductModel
+@model List<ProductFormModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "List Products By Name";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+    //var products = ViewData["ProductsList"] as List<ProductFormModel>;
+
+    var categories = ViewData["CategoriesList"] as List<Category>;
+}
+
+<h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]:</h5>
+<h5 class="text-center text-dark font-weight-bold">@ViewData["ProductName"]</h5>
+<hr />  <!-- Horizontal row for separation -->
+@if (!string.IsNullOrWhiteSpace(@successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>@successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<form>
+    <button asp-controller="Product" asp-action="Create" class="btn btn-primary mb-1">Create Product</button>
+    <button asp-controller="Product" asp-action="Index" class="btn btn-primary mb-1" style="float: right">Back</button>
+    <!-- To Do Add Back button -->
+    <table class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr class="table-active">
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Reviews</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (ProductFormModel product in Model)
+                {
+                    <tr>
+                        <td class="text-center">@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        @{
+                            var category = categories.Find(cat => cat.Id == product.Category);
+                        }
+                        <td class="text-center">@category.Name</td>
+                        <td class="text-end">@product.Price</td>
+                        <td class="text-center">@product.Reviews.Count()</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"
+                                   class="btn btn-primary">Edit</a>
+                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                                   class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div>
+                            No products available at this category!
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

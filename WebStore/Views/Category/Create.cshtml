@@ -4,19 +4,20 @@
     ViewBag.Title = "Create Category";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h5 class="text-center text-primary font-weight-bold">@ViewBag.Title</h5>
 <hr />
+
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Create" method="post">
             <div class="mb-3">
-                <label asp-for="Name" class="form-label">Name</label> 
+                <label asp-for="Name" class="form-label text-primary">Name</label>
                 <input asp-for="Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary mb-2" type="submit" value="Add" />
-                <a asp-controller="Category" asp-action="ListCategories" class="btn btn-primary mb-2">Cancel</a>
+                <input class="btn btn-primary mb-2" type="submit" value="Submit" />
+                <a asp-controller="Category" asp-action="ListCategories" class="btn btn-primary mb-2" style="float: right">Cancel</a>
             </div>
 
         </form>

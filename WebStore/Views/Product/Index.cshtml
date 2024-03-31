@@ -3,63 +3,65 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Search Product";
-    
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
 }
 
-<h3 class="text-center">@ViewData["Title"]</h3>
-<hr>
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post" asp-controller="Product" asp-action="SearchProduct">
-            <div class="mb-3">                
-                <!-- <label asp-for="Id" class="form-label">ID</label> <input asp-for="Id" class="form-control" aria-required="true" />
-                <span asp-validation-for="Id" class="text-danger"></span> -->
-                <!-- Check validation with empty id or empty name -->
+<h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]</h5>
 
-                <!-- The <label> tag defines a label for several elements: -->
+<form method="get" asp-controller="Product" asp-action="ListProdByName">
+    <div class="mb-3 w-50 mx-auto">
+        <!-- <label asp-for="Id" class="form-label">ID</label>
+        <input asp-for="Id" class="form-control" aria-required="true" />             
+        <span asp-validation-for="Id" class="text-danger"></span> -->        
+        <!-- Check validation with empty id or empty name -->
+                      
+        <!-- <label asp-for="Name" class="form-label">Name</label>             
+        <input asp-for="Name" class="form-control" aria-required="true" />             
+        <span asp-validation-for="Name" class="text-danger"></span> -->
 
-               
-                <!-- <label asp-for="Name" class="form-label">Name</label> <input asp-for="Name" class="form-control" aria-required="true" />
-                <span asp-validation-for="Name" class="text-danger"></span> -->
-
-                <label for="id" class="form-label">ID</label> <input id="id" type="number" name="id" class="form-control" />
-                <br />
-               
-                <h4 class="text-center">OR </h4>
-
-                <label for="sname" class="form-label">Name</label> <input id="sname" type="text" name="sname" class="form-control" />
+        <div class="input-group mb-3">
+            <input id="pname" type="text" name="productName" class="form-control" 
+            placeholder="Product's name" aria-label="Product name" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
             </div>
-            <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Search" /></div>
-            <!-- To Do - Message for not found -->
-        </form>
-
-        <hr> <!--???-->
-        <h3 class="text-center">Create Product</h3> <!--???-->
-        <!-- <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Create" /></div> To Do - Call Create view -->
-        <a asp-controller="Product" asp-action="Create" class="btn btn-primary mb-2">Create</a>
-
-        <h3 class="text-center">List Products By Category</h3> <!--???-->
-
-        <form asp-action="ListProdByCat" method="post">
-            <div class="mb-3">
-                <!--<label asp-for="Id" class="form-label">Select Category</label> -->
-                <!--<select asp-for="Id" class="form-control"> -->
-                <label class="form-label"> Select Category</label>
-                <select name="catId" class="form-control">
-                    @*@foreach (var category in ViewData["Categories"] as List<CategoryFormModel>)*@
-                    @foreach (var category in Model)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-
-                </select> 
-                <!--<span asp-validation-for="Id" class="text-danger"></span> -->
-            </div>
-            
-            <div class="mb-3">
-                <input class="btn btn-primary mb-2" type="submit" value="List" />
-             <a asp-controller="Product" asp-action="Index" class="btn btn-primary mb-2">Cancel</a>
-            </div>
-        </form>
+        </div>
+                           
+        <!-- <label for="sname" class="form-label text-primary">Name</label>
+        <input id="pname" type="text" name="pname" class="form-control" /> -->
     </div>
+    <!-- <div class="d-grid">
+        <button class="btn btn-primary mb-2" type="submit" style="float: right">Search</button>
+    </div> -->
+</form>
+        
+<hr />
+<h5 class="text-center text-primary font-weight-bold">Create Product</h5>
+        
+<div class="d-grid mb-3 text-center w-25 mx-auto">
+    <a asp-controller="Product" asp-action="Create" class="btn btn-primary mb-3" >Create</a>
 </div>
+
+<hr />        
+<h5 class="text-center text-primary font-weight-bold">List Products By Category</h5>
+  
+<form asp-controller="Product" asp-action="ListProdByCat" method="post">            
+    <div class="mb-2 w-50 mx-auto">                
+        <!--<label asp-for="Id" class="form-label">Select Category</label> -->               
+        <!--<select asp-for="Id" class="form-control"> -->                
+        <label class="form-label text-primary">Select Category</label>
+        <select name="catId" class="form-control">
+            @*@foreach (var category in ViewData["Categories"] as List<CategoryFormModel>)*@                    
+            @foreach (var category in Model)
+            {                                            
+                <option value="@category.Id">@category.Name</option>                    
+            }                
+        </select>             
+    </div>
+            
+    <div class="d-grid mb-3 text-center w-25 mx-auto">
+        <!-- <input class="btn btn-primary mb-2" type="submit" value="List" /> -->
+        <button class="btn btn-primary mb-3" type="submit">Get List</button>
+    </div>    
+</form>

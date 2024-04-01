@@ -201,8 +201,13 @@ namespace WebStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ListProdByName(string productName)
         {
-            ViewData["CategoriesList"] = productService.GetCategories();
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                TempData["errorMessage"] = "Enter product name!";
+                return RedirectToAction("Index");
+            }
 
+            ViewData["CategoriesList"] = productService.GetCategories();
             var products = productService.GetProductByName(productName);
             return View("ListProdByName", products);
         }

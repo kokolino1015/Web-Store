@@ -11958,19 +11958,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kaloyan\\.nuget\\packages\\": {}
+    "C:\\Users\\Mario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kaloyan\\Desktop\\ИТ МОН\\ИТ МОН 2023-24\\WebStoreEmail\\Web-Store\\WebStore\\WebStore.csproj",
+      "projectUniqueName": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\WebStore.csproj",
       "projectName": "WebStore",
-      "projectPath": "C:\\Users\\Kaloyan\\Desktop\\ИТ МОН\\ИТ МОН 2023-24\\WebStoreEmail\\Web-Store\\WebStore\\WebStore.csproj",
-      "packagesPath": "C:\\Users\\Kaloyan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kaloyan\\Desktop\\ИТ МОН\\ИТ МОН 2023-24\\WebStoreEmail\\Web-Store\\WebStore\\obj\\",
+      "projectPath": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\WebStore.csproj",
+      "packagesPath": "C:\\Users\\Mario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mario\\Desktop\\VS\\WebStoreEmail\\Web-Store\\WebStore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kaloyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11990,6 +11990,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -12066,7 +12071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

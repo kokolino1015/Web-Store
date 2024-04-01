@@ -145,6 +145,12 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult FindCatByName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                TempData["errorMessage"] = "Enter category name!";
+                return RedirectToAction("Index");
+            }
+
             CategoryFormModel category = categoryService.GetCatByName(name);
             return View(category);
         }

@@ -9,6 +9,14 @@
 
 <h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]</h5>
 
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-info">
+        <strong>Info! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
 <form method="get" asp-controller="Product" asp-action="ListProdByName">
     <div class="mb-3 w-50 mx-auto">
         <!-- <label asp-for="Id" class="form-label">ID</label>
@@ -22,7 +30,7 @@
 
         <div class="input-group mb-3">
             <input id="pname" type="text" name="productName" class="form-control" 
-            placeholder="Product's name" aria-label="Product name" aria-describedby="basic-addon2">
+            placeholder="Product Name" aria-label="Product name" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>

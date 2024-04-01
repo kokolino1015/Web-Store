@@ -2,11 +2,20 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Roles";
+    var errorMessage = TempData["errorMessage"]?.ToString();
 }
 
 <h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]</h5>
 <hr>
-    
+
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-info">
+        <strong>Info! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
 <form asp-controller="Admin" asp-action="FindRoleByName" method="post">
     <div class="mb-3 w-50 mx-auto">
         <!-- <label asp-for="RoleName" class="form-label">Role Name</label> -->

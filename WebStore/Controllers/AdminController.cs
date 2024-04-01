@@ -115,6 +115,13 @@ namespace WebStore.Controllers
         [HttpPost]
         public async Task<IActionResult> FindRoleByName(string roleName)
         {
+
+            if (string.IsNullOrWhiteSpace(roleName))
+            {
+                TempData["errorMessage"] = "Enter role name!";
+                return RedirectToAction("Index");
+            }
+
             //First Get the role information from the database
             IdentityRole role = await roleManager.FindByNameAsync(roleName);
             if (role == null)

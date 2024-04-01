@@ -3,11 +3,20 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Category";
+    var errorMessage = TempData["errorMessage"]?.ToString();
 }
 
 <h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]</h5>
 <hr>
-        
+
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-info">
+        <strong>Info! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+  
 <form asp-controller="Category" asp-action="FindCatByName" method="post">
            
     <div class="mb-3 w-50 mx-auto">
@@ -24,7 +33,7 @@
              <span asp-validation-for="Name" class="text-danger"></span> -->
 
         <div class="input-group mb-3">
-            <input asp-for="Name" class="form-control" aria-required="true" placeholder="Category name" 
+            <input asp-for="Name" class="form-control" aria-required="true" placeholder="Category Name" 
             aria-label="Category name" aria-describedby="basic-addon2">
             <span asp-validation-for="Name" class="text-danger"></span>
 
@@ -41,3 +50,10 @@
     <a asp-controller="Category" asp-action="Create" class="btn btn-primary mb-2">Create</a>
     <a asp-controller="Category" asp-action="ListCategories" class="btn btn-primary mb-2">Get All</a>
 </div>
+
+@*
+<!-- Client side validation -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+*@

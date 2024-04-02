@@ -10,11 +10,11 @@
 <hr />
 
 
-<form asp-action="SetUserRole" method="post">
+<form asp-controller="Admin" asp-action="SetUserRole" method="post">
     <div class="row mb-3 w-50 mx-auto">
         <div class="card-body">
             <label asp-for="UserName" class="form-label text-primary">User</label>
-            <input asp-for="UserName" value="@Model.UserName" disabled class="form-control" aria-required="true" />
+            <input asp-for="UserName" value="@Model.UserName" readonly class="form-control" aria-required="true" />
         </div>
         <div class="card-body">
             <label class="form-label text-primary">User Roles:</label>

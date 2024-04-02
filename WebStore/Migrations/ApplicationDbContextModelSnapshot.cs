@@ -56,15 +56,15 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed",
-                            ConcurrencyStamp = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed",
+                            Id = "96311aef-454a-47f9-bc37-cd8665d740ca",
+                            ConcurrencyStamp = "96311aef-454a-47f9-bc37-cd8665d740ca",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e0995bab-9f30-41b7-abc9-eccded60b9cc",
-                            ConcurrencyStamp = "9c28cf23-ac4a-4199-984c-0f03368d3336",
+                            Id = "59c6cb87-d205-4ed3-98c3-cbe7d171afc0",
+                            ConcurrencyStamp = "5b679292-4515-48b2-a035-af6e86c52345",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -183,8 +183,8 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "906701bc-fe8a-490c-9791-2f584af87223",
-                            RoleId = "c8e5ec43-5bc4-477d-b852-c5a7cd73ceed"
+                            UserId = "63d64290-a4d8-4242-ac3e-2391f5a0b0aa",
+                            RoleId = "96311aef-454a-47f9-bc37-cd8665d740ca"
                         });
                 });
 
@@ -224,7 +224,7 @@ namespace WebStore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("integer")
                         .HasColumnName("cart_id");
 
@@ -320,16 +320,18 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "906701bc-fe8a-490c-9791-2f584af87223",
+                            Id = "63d64290-a4d8-4242-ac3e-2391f5a0b0aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0fa26696-3ef1-4cf5-ba45-07de889153ce",
+                            CartId = 1,
+                            ConcurrencyStamp = "72c5eb9b-cfd9-416c-ad4c-d83e012cff8f",
                             Email = "admin@webshop.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@WEBSHOP.COM",
                             NormalizedUserName = "ADMIN@WEBSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDb6xSUdWhDDYSx/0DLjrgkwsTxvb7y8zxybU7CMET1mvij7WG42pP6MIV5eWGrQiw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGlUnkT1rO/RVAalH8QrIlbpjvwBauDI+HLFWBdxmoPHOuOYIDUHaFQfT/XZ/GTZag==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b3e7da81-a63c-42b5-860e-5b71cb1ff2e7",
+                            SecurityStamp = "c0c671a1-0b9a-43f1-be33-fd237b520e8e",
                             TwoFactorEnabled = false,
                             UserName = "admin@webshop.com"
                         });
@@ -348,6 +350,12 @@ namespace WebStore.Migrations
                         .HasName("pk_carts");
 
                     b.ToTable("carts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.CartItem", b =>
@@ -629,6 +637,8 @@ namespace WebStore.Migrations
                     b.HasOne("WebStore.Data.Entities.Cart", "Cart")
                         .WithMany()
                         .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_asp_net_users_carts_cart_id");
 
                     b.HasOne("WebStore.Data.Entities.Role", "Role")

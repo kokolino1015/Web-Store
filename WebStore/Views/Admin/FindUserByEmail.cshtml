@@ -1,43 +1,47 @@
-﻿@model WebStore.Models.RoleModel.SetRoleViewModel;
-
+﻿@model WebStore.Models.AccountModel.AccountViewModel;
 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "User Role";
+    ViewBag.Title = "User Roles";
 }
 
-<h5 class="text-center text-primary font-weight-bold">@ViewBag.Title</h5>
+<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
-
-<form asp-controller="Admin" asp-action="SetUserRole" method="post">
-    <div class="row mb-3 w-50 mx-auto">
-        <div class="card-body">
-            <label asp-for="UserName" class="form-label text-primary">User</label>
-            <input asp-for="UserName" value="@Model.UserName" readonly class="form-control" aria-required="true" />
-        </div>
-        <div class="card-body">
-            <label class="form-label text-primary">User Roles:</label>
-            <ul>@Model.RoleName</ul>
-        </div>
-        <div class="card-body">
-            <label asp-for="RoleName" class="form-label text-primary">New Role</label>
-            <select asp-for="RoleName" class="form-control">
-                <option>Select role</option>
-                @foreach (var role in Model.AllRoles)
-                {
-                        <option value="@role.Name">@role.Name</option>
-                }
-            </select>
-                <span asp-validation-for="RoleName" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <input class="btn btn-primary mb-2" type="submit" value="Submit" />
-            <a asp-controller="Admin" asp-action="AssignRole" class="btn btn-primary mb-2" style="float: right">Cancel</a>    
-        </div>
+<div class="row">
+    <form asp-action="SetUserRole" method="post">
+    <div class="card-body">
+        <label asp-for="Username" class="form-label">User</label>
+        <input asp-for="Username" value="@Model.Username" class="form-control" aria-required="true" />
+       
     </div>
-</form>
+        <div class="card-body">
+            <label class="form-label">User Roles:</label>
+        <ul>
+        @foreach (var role in ViewBag.UserRoles)
+        {
+                <li>@role.Name</li>
+        }
+        </ul>
+    </div>
+        <div class="card-body">
+        <label asp-for="Role" class="form-label">Set Role</label>
+        <select asp-for="Role" class="form-control">
+
+        <option>Select role</option>
+
+        @foreach (var role in ViewBag.AllRoles)
+        {
+            <option value="@role.Id">@role.Name</option>
+        }
+    </select> <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3"><input class="btn btn-secondary mb-2" type="submit" value="Set Role" /></div>
+    </form>
+
+
+</div>
+
 
 
 

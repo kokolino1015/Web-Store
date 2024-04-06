@@ -22,7 +22,7 @@ namespace WebStore.Services
             Product product = new Product()
             {
                 Name = model.Name,
-                Price = model.Price,
+                OriginalPrice = model.OriginalPrice,
                 Description = model.Description,
                 Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault(),
                 isDeleted = false
@@ -38,15 +38,16 @@ namespace WebStore.Services
                 Name = x.Name,
             }).ToList();
         }
-        public ProductViewModel GetProductById(int id)
+        public ProductViewModel GetProductDetails(int id)
         {
             return context.Products.Where(x => x.Id == id).Select(x => new ProductViewModel
             {
                 Id = x.Id,
-                Name = x.Name,
-                Price = x.Price,
+                Name= x.Name, 
+                OriginalPrice = x.OriginalPrice, 
+                DiscountPrice = x.DiscountPrice,
                 Description = x.Description,
-                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y => new Review
+                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y=> new Review
                 {
                     Id = y.Id,
                     Description = y.Description,
@@ -55,26 +56,32 @@ namespace WebStore.Services
                 Category = x.Category.Name
             }).FirstOrDefault();
         }
-        public ProductFormModel GetAdById(int id)
+        public ProductFormModel GetProductById(int id)
         {
-            return context.Products.Where(x => x.Id == id).Select(product => new ProductFormModel
+            return context.Products.Where(x => x.Id == id).Select(x => new ProductFormModel
             {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Category = product.Category.Id,
-                Price = product.Price
-
+                Id = x.Id,
+                Name = x.Name,
+                OriginalPrice = x.OriginalPrice,
+                Description = x.Description,
+                Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y => new Review
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Owner = y.Owner
+                }).ToList(),
+                Category = x.Category.Id
             }).FirstOrDefault();
         }
 
+
         public void Update(ProductFormModel model)
         {
-            Product ad = context.Products.Find(model.Id);
-            ad.Description = model.Description;
-            ad.Name = model.Name;
-            ad.Price = model.Price;
-            ad.Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault();
+            Product product = context.Products.Find(model.Id);
+            product.Description = model.Description;
+            product.Name = model.Name;
+            product.OriginalPrice = model.OriginalPrice;
+            product.Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault();
             this.context.SaveChanges();
         }
         public void Delete(int id)
@@ -83,33 +90,18 @@ namespace WebStore.Services
             model.isDeleted = true;
             this.context.SaveChanges();
         }
-
+        
         public async Task<List<ProductFormModel>> GetFirst10Ads()
         {
             return await context.Products.Take(10).Where(x => !x.isDeleted).Select(x => new ProductFormModel()
             {
                 Id = x.Id,
                 Category = x.Category.Id,
-                Description = x.Description,
+                Description = x.Description, 
                 Name = x.Name,
-                Price = x.Price,
+                OriginalPrice = x.OriginalPrice,
+                DiscountPrice = x.DiscountPrice,
             }).ToListAsync();
-        }
-
-        public List<ProductFormModel> GetProductByName(string productName)
-        {
-            List<ProductFormModel> products = context.Products
-                .Where(p => p.Name == productName && !p.isDeleted)
-                .Select(x => new ProductFormModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Category = x.Category.Id,
-                Price = x.Price,
-                Reviews = x.Reviews
-            }).ToList(); 
-            return products;
         }
     }
 }

@@ -20,15 +20,7 @@ builder.Services.Configure<IdentityOptions>(options => options.SignIn.RequireCon
 //
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-/*
-// Temporary turn off EmailConfirmation
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-*/
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -48,6 +40,7 @@ builder.Services.AddSingleton<ChargeService>(new ChargeService());
 builder.Services.AddSingleton<TransactionService>(new TransactionService());
 builder.Services.AddScoped<WebStore.Services.ProductService, WebStore.Services.ProductService>();
 builder.Services.AddScoped<CategoryService, CategoryService>();
+builder.Services.AddScoped<SalesService, SalesService>();
 builder.Services.AddScoped<CommonService, CommonService>();
 builder.Services.AddScoped<WebStore.Services.ReviewService, WebStore.Services.ReviewService>();
 builder.Services.AddScoped<CartService, CartService>();

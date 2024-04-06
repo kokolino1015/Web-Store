@@ -71,7 +71,15 @@ namespace WebStore.Services
             foreach (var item in cart.Items)
             {
                 amountOfItems += item.Quantity;
-                amount += item.Quantity * item.product.Price;
+                if(item.product.DiscountPrice != 0)
+                {
+                    amount += item.Quantity * item.product.DiscountPrice;
+                }
+                else
+                {
+                    amount += item.Quantity * item.product.OriginalPrice;
+                }
+                
                 productNames.Add(item.product.Name);
             }
             Payment payment = new Payment()

@@ -42,9 +42,6 @@ namespace WebStore.Data
                 new IdentityRole { Name = "Employee", NormalizedName = "EMPLOYEE", ConcurrencyStamp = Guid.NewGuid().ToString()}
             );
 
-            // Seed carts table 
-            builder.Entity<Cart>().HasData(new Cart { Id = 1 });
-
             //create user
             var appUser = new ApplicationUser
             {
@@ -52,9 +49,7 @@ namespace WebStore.Data
                 Email = "admin@webshop.com",
                 EmailConfirmed = true,
                 UserName = "admin@webshop.com",
-                NormalizedUserName = "ADMIN@WEBSHOP.COM",
-                NormalizedEmail = "ADMIN@WEBSHOP.COM", // Cannot login without it
-                CartId = 1 // If missing an error is generated when start the application
+                NormalizedUserName = "ADMIN@WEBSHOP.COM"
             };
             //Cart Id ????
 

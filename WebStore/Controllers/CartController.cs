@@ -9,14 +9,14 @@ using WebStore.Services;
 
 namespace WebStore.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly CartService cartService;
         private readonly CommonService commonService;
         private readonly ChargeService chargeService;
         private readonly IEmailService emailService;
         private static Dictionary<int, PaymentModel> models = new Dictionary<int, PaymentModel>();
-        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService)
+        public CartController(CartService _cartService, CommonService _commonService, ChargeService _chargeService, IEmailService emailService):base(_commonService)
         {
             chargeService = _chargeService;
             cartService = _cartService;
@@ -33,14 +33,14 @@ namespace WebStore.Controllers
         public ActionResult Add(int id)
         {
             ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+           
             cartService.Add(id, user.Cart.Id);
             return Redirect($"/Cart/Details/{user.Cart.Id}");
         }
         public ActionResult Remove(int id)
         {
             ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
+            
             cartService.Remove(id, user.Cart.Id);
             return Redirect($"/Cart/Details/{user.Cart.Id}");
         }

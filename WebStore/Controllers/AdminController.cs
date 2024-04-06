@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data.Entities.Account;
-using WebStore.Data.Entities;
 using WebStore.Models.ProductModel;
 using WebStore.Services;
 using Microsoft.EntityFrameworkCore;
@@ -115,13 +114,6 @@ namespace WebStore.Controllers
         [HttpPost]
         public async Task<IActionResult> FindRoleByName(string roleName)
         {
-
-            if (string.IsNullOrWhiteSpace(roleName))
-            {
-                TempData["errorMessage"] = "Enter role name!";
-                return RedirectToAction("Index");
-            }
-
             //First Get the role information from the database
             IdentityRole role = await roleManager.FindByNameAsync(roleName);
             if (role == null)
@@ -209,65 +201,33 @@ namespace WebStore.Controllers
         {
             //First Get the user information from the database
             var user = await userManager.FindByNameAsync(accountModel.Username) ;
-            var userRoles = await userManager.GetRolesAsync(user); //Return list of rolenames
+            var roles = await userManager.GetRolesAsync(user); //Return list of rolenames
             if (user == null)
             {
                 return View("Error");
             }
-
-            var allRoles = await roleManager.Roles.ToListAsync();
-            
-            //Populate the SetRoleViewModel from the data retrived from the database
-            SetRoleViewModel model = new SetRoleViewModel
+            //Populate the EditRoleViewModel from the data retrived from the database
+            var model = new AccountViewModel
             {
-                //Id = user.Id,
-                UserName = user.Email.ToString(),
-                RoleName = userRoles.FirstOrDefault("None"),
-                AllRoles = allRoles
+                Id = user.Id,
+                Username = user.Email
             };
 
-            //ViewBag.AllRoles = allRoles;
+            var allRoles = await roleManager.Roles.ToListAsync();
+            ViewBag.AllRoles = allRoles;
 
-            //ViewBag.UserRoles = roles;
+            ViewBag.UserRoles = roles;
            
             return View(model);
         }
 
-        public async Task<IActionResult> SetUserRole(string userName, string roleName)
+        public async Task<IActionResult> SetUserRole(AccountViewModel accountModel, string userRole)
         {
-            ApplicationUser user = await userManager.FindByNameAsync(userName);
-
-            // Check if the user is in the role already
-            var isInRole = await userManager.IsInRoleAsync(user, roleName);
-            if (isInRole)
-            {
-                ModelState.AddModelError("", "User is already in role");
-                //return RedirectToAction("FindUserByEmail");
-            }
-
-            var userRoles = await userManager.GetRolesAsync(user);
-            if (userRoles.Any())
-            {
-                var currentRole = userRoles.FirstOrDefault();
-                await userManager.RemoveFromRoleAsync(user, currentRole);
-            }
-
-            var result = await userManager.AddToRoleAsync(user, roleName);
+            ApplicationUser user = await userManager.FindByNameAsync(accountModel.Username);
+            var result = await userManager.AddToRoleAsync(user, userRole);
             if (result.Succeeded)
             {
-                var allRoles = await roleManager.Roles.ToListAsync();
-                // Remove current role of user from list of roles
-                IdentityRole role = allRoles.Find(x => x.Name == roleName);
-                allRoles.Remove(role);
-
-                var model = new SetRoleViewModel
-                {
-                    UserName = user.Email,
-                    RoleName = roleName,
-                    AllRoles = allRoles
-            };
-
-                return View("FindUserByEmail", model);
+                return View("AssignRole", "Admin");
             }
             else
                 return View("Error");

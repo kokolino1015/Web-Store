@@ -40,7 +40,7 @@ namespace WebStore.Services
         }
         public void Delete(int id)
         {
-            Category model = this.context.Categories.Find(id);
+            var model = this.context.Categories.Find(id);
             model.IsDeleted = true;
             this.context.SaveChanges();
         }
@@ -54,14 +54,6 @@ namespace WebStore.Services
         public List<Category> GetAllCategories()
         {
             return context.Categories.Where(x => !x.IsDeleted).ToList();
-        }
-
-        public CategoryFormModel GetCatByName(string categoryName)
-        {
-            return context.Categories
-                .Where(x => !x.IsDeleted && x.Name == categoryName)
-                .Select(c => new CategoryFormModel { Id = c.Id, Name = c.Name })
-                .FirstOrDefault();
         }
     }
 }

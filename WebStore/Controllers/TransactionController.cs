@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Stripe;
+using WebStore.Services;
 
 namespace WebStore.Controllers
 {
-    public class TransactionController : Controller
+    public class TransactionController : BaseController
     {
         private readonly ChargeService chargeService;
-
-        public TransactionController(ChargeService chargeService)
+        private readonly CommonService commonService;
+        public TransactionController(ChargeService chargeService, CommonService _commonService) : base(_commonService)
         {
+            commonService = _commonService;
             this.chargeService = chargeService;
         }
 

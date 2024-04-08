@@ -19,7 +19,7 @@ namespace WebStore.Services
         }
         public void SetSaleForProduct(SalesOnProduct model)
         {
-            Product product = context.Products.Where(x=> model.Product.Id == x.Id).FirstOrDefault();
+            Product product = context.Products.Where(x=> model.Product == x.Id).FirstOrDefault();
             product.DiscountPrice = (1-(model.Discount/100)) * product.OriginalPrice;
             context.Products.Update(product);
             context.SaveChanges();
@@ -30,7 +30,7 @@ namespace WebStore.Services
         }
         public void SetSaleForCategory(SalesOnCategory model)
         {
-            List<Product> products = context.Products.Where(x => model.Category.Id == x.Category.Id).ToList();
+            List<Product> products = context.Products.Where(x => model.Category == x.Category.Id).ToList();
             foreach (Product product in products)
             {
                 product.DiscountPrice = (1 - (model.Discount / 100)) * product.OriginalPrice;

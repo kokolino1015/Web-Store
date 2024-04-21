@@ -38,21 +38,34 @@ namespace WebStore.Controllers
             CategoryFormModel model = new CategoryFormModel();
             return View(model);
         }
+
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(CategoryFormModel model)
         {
-            ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
-            //if (commonService.FindRole(User).Name != "employer")
-            //{
-            //    return Unauthorized();
-            //}
-            categoryService.Create(model);
-            //return RedirectToAction("Index", "Home");
-            //return RedirectToAction("Create", "Create");
+            if (ModelState.IsValid)
+            {
 
-            return RedirectToAction("ListCategories");
+
+                ApplicationUser user = commonService.FindUser(User);
+                ViewBag.CartId = user.Cart.Id;
+                //if (commonService.FindRole(User).Name != "employer")
+                //{
+                //    return Unauthorized();
+                //}
+                categoryService.Create(model);
+                //return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Create", "Create");
+
+                TempData["successMessage"] = "Category created successfully";
+                return RedirectToAction("ListCategories");
+            }
+            else
+            {
+                TempData["errorMessage"] = "Model data is not valid!";
+                return View();
+            }
         }
 
         [Authorize(Roles = "Admin")]
@@ -82,13 +95,27 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Delete(int catId)
         {
-            ApplicationUser user = commonService.FindUser(User);
-            ViewBag.CartId = user.Cart.Id;
-            //return View(categoryService.GetCategoryById(catId));
-            
-            categoryService.Delete(catId);
-            //return View("ListCategories", ListCategories());
-            return RedirectToAction("ListCategories");
+            // Check if there are products in category to delete
+            List<Product> productsInCategory = categoryService.GetAllIdByCategoryId(catId);
+
+            if (productsInCategory.Any())
+            {
+                TempData["errorMessage"] = "This category contains products!";
+                //return RedirectToAction("ListCategories");
+                return Redirect($"/Product/ListProdByCat/{catId}");
+
+            }
+            else
+            {
+                ApplicationUser user = commonService.FindUser(User);
+                ViewBag.CartId = user.Cart.Id;
+                //return View(categoryService.GetCategoryById(catId));
+
+                categoryService.Delete(catId);
+                TempData["successMessage"] = "Category deleted successfully!";
+                //return View("ListCategories", ListCategories());
+                return RedirectToAction("ListCategories");
+            }
         }
 
         /*

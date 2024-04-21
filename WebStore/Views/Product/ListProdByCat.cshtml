@@ -38,7 +38,9 @@
             <th class="text-center">Name</th>
             <th class="text-center">Description</th>
             <th class="text-center">Price</th>
+            <th class="text-center">Quantity</th>
             <th class="text-center">Reviews</th>
+            <th class="text-center">Photos</th>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
@@ -52,7 +54,35 @@
                     <td>@product.Name</td>
                     <td>@product.Description</td>
                     <td class="text-end">@product.Price</td>
-                    <td class="text-center">@product.Reviews.Count()</td>
+                    <td class="text-end">@product.Quantity</td>
+
+                    @if (product.Reviews.Count() > 0)
+                    {
+                        <td class="text-center">
+                            <a asp-controller="Review" asp-action="ListProductReviews" asp-route-id="@product.Id"       
+                            class="link-primary">@product.Reviews.Count()</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center">@product.Reviews.Count()</td>
+                    }
+
+                    @if (product.Photos.Count() > 0)
+                    {
+                        <td class="text-center">
+                            <a asp-controller="Photo" asp-action="ListProductPhotos" asp-route-id="@product.Id"       
+                            class="link-primary">@product.Photos.Count()</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center">
+                            <a asp-controller="Photo" asp-action="UploadPhotos" asp-route-id="@product.Id"
+                            class="link-primary">Upload</a> 
+                        </td>
+                    }
+
                     <td class="text-center">
                         <div class="btn-group btn-group-sm">
                             <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" 

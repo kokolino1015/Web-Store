@@ -2,10 +2,19 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Create Category";
+    var errorMessage = TempData["errorMessage"]?.ToString();
 }
 
 <h5 class="text-center text-primary font-weight-bold">@ViewBag.Title</h5>
 <hr />
+
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
@@ -23,7 +32,10 @@
         </form>
     </div>
 </div>
+
+@*
 @section Scripts
     {
     <partial name="_ValidationScriptsPartial" />
 }
+*@

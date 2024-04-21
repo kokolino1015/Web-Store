@@ -32,7 +32,7 @@
 <form>
     <button asp-controller="Product" asp-action="Create" class="btn btn-primary mb-1">Create Product</button>
     <button asp-controller="Product" asp-action="Index" class="btn btn-primary mb-1" style="float: right">Back</button>
-    <!-- To Do Add Back button -->
+
     <table class="table table-responsive table-hover table-bordered">
         <thead>
             <tr class="table-active">
@@ -41,7 +41,9 @@
                 <th class="text-center">Description</th>
                 <th class="text-center">Category</th>
                 <th class="text-center">Price</th>
+                <th class="text-center">Quantity</th>
                 <th class="text-center">Reviews</th>
+                <th class="text-center">Photos</th>
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
@@ -59,7 +61,38 @@
                         }
                         <td class="text-center">@category.Name</td>
                         <td class="text-end">@product.Price</td>
-                        <td class="text-center">@product.Reviews.Count()</td>
+                        <td class="text-end">@product.Quantity</td>
+
+                        @{
+                            var reviewsCount = product.Reviews.Count();
+                            if (reviewsCount > 0)
+                            {
+                                <td class="text-center">
+                                    <a asp-controller="Review" asp-action="ListProductReviews" asp-route-id="@product.Id"
+                                    class="link-primary">@reviewsCount</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="text-center">@product.Reviews.Count()</td>
+                            }
+                        }
+
+                        @if (product.Photos.Count() > 0)
+                        {
+                            <td class="text-center">
+                                <a asp-controller="Photo" asp-action="ListProductPhotos" asp-route-id="@product.Id"
+                                   class="link-primary">@product.Photos.Count()</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-center">
+                                <a asp-controller="Photo" asp-action="UploadPhotos" asp-route-id="@product.Id"
+                                   class="link-primary">Upload</a>
+                            </td>
+                        }
+                        
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"
@@ -77,7 +110,7 @@
                 <tr>
                     <td colspan="6">
                         <div>
-                            No products available at this category!
+                            No products available with this name!
                         </div>
                     </td>
                 </tr>

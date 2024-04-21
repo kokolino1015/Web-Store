@@ -56,15 +56,15 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96311aef-454a-47f9-bc37-cd8665d740ca",
-                            ConcurrencyStamp = "96311aef-454a-47f9-bc37-cd8665d740ca",
+                            Id = "1e3718e2-769d-4c98-aedf-ab5f2dd7661a",
+                            ConcurrencyStamp = "1e3718e2-769d-4c98-aedf-ab5f2dd7661a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "59c6cb87-d205-4ed3-98c3-cbe7d171afc0",
-                            ConcurrencyStamp = "5b679292-4515-48b2-a035-af6e86c52345",
+                            Id = "c5fd0942-18bb-4913-870e-5587e324f3a9",
+                            ConcurrencyStamp = "c67cf10c-138b-4efb-b93a-89f69f2684e4",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -183,8 +183,8 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "63d64290-a4d8-4242-ac3e-2391f5a0b0aa",
-                            RoleId = "96311aef-454a-47f9-bc37-cd8665d740ca"
+                            UserId = "47c74ecd-7992-42e8-8312-692f049b2d3f",
+                            RoleId = "1e3718e2-769d-4c98-aedf-ab5f2dd7661a"
                         });
                 });
 
@@ -320,18 +320,18 @@ namespace WebStore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "63d64290-a4d8-4242-ac3e-2391f5a0b0aa",
+                            Id = "47c74ecd-7992-42e8-8312-692f049b2d3f",
                             AccessFailedCount = 0,
                             CartId = 1,
-                            ConcurrencyStamp = "72c5eb9b-cfd9-416c-ad4c-d83e012cff8f",
+                            ConcurrencyStamp = "4d77cdd0-7396-4ddb-ab16-39cc9a184751",
                             Email = "admin@webshop.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WEBSHOP.COM",
                             NormalizedUserName = "ADMIN@WEBSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGlUnkT1rO/RVAalH8QrIlbpjvwBauDI+HLFWBdxmoPHOuOYIDUHaFQfT/XZ/GTZag==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEItSdUZtcgBF9bRYW/zsl9OgiNLfPN2eQiLV35XcFT53ZrpSvT36k+A9tFDsbVOg/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c0c671a1-0b9a-43f1-be33-fd237b520e8e",
+                            SecurityStamp = "119cd12e-140d-415a-99bf-21a03a6a8872",
                             TwoFactorEnabled = false,
                             UserName = "admin@webshop.com"
                         });
@@ -450,6 +450,47 @@ namespace WebStore.Migrations
                     b.ToTable("payments", (string)null);
                 });
 
+            modelBuilder.Entity("WebStore.Data.Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Bytes")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("bytes");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("file_extension");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    b.Property<decimal>("Size")
+                        .HasColumnType("numeric")
+                        .HasColumnName("size");
+
+                    b.HasKey("Id")
+                        .HasName("pk_photos");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_photos_product_id");
+
+                    b.ToTable("photos", (string)null);
+                });
+
             modelBuilder.Entity("WebStore.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -476,6 +517,10 @@ namespace WebStore.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
 
                     b.Property<bool>("isDeleted")
                         .HasColumnType("boolean")
@@ -678,6 +723,18 @@ namespace WebStore.Migrations
                         .HasConstraintName("fk_payments_carts_cart_id");
 
                     b.Navigation("Cart");
+                });
+
+            modelBuilder.Entity("WebStore.Data.Entities.Photo", b =>
+                {
+                    b.HasOne("WebStore.Data.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_photos_products_product_id");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Product", b =>

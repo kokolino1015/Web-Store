@@ -13,12 +13,30 @@
             <p class="card-text"><span class="fw-bold">Description: </span>@Model.Description</p>
             <p class="card-text"><span class="fw-bold">Price: </span>@Model.Price $$</p>
             <p class="card-text"><span class="fw-bold">Category: </span>@Model.Category </p>
+            @foreach (var photo in Model.Photos)
+            {
+                <tr>
+                   
+                    @{
+                        var base64Image = Convert.ToBase64String(photo.Bytes);
+                        var image = String.Format($"data:image/{photo.FileExtension};base64,{base64Image}");
+
+                    }
+                    <td class="text-center align-middle">
+                        <img src="@image" alt="No image" height="100" width="100" class="img-fluid">
+                    </td>
+
+                    
+                </tr>
+            }
+            <div>
             <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Edit</a>
             <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-primary mb-2">Delete</a>
             <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id"
                class="btn btn-primary mb-2">Add to cart</a>
+            </div>
             
 
         </div>

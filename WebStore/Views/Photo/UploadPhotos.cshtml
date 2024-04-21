@@ -1,0 +1,37 @@
+﻿@using WebStore.Models.ProductModel
+@model WebStore.Models.PhotoModel.PhotoUploadModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Multiple Photos Upload";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+    var product = ViewData["Product"] as ProductFormModel;
+}
+
+<h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]:</h5>
+<h5 class="text-center text-dark font-weight-bold">@product.Name</h5>
+<hr />  <!-- Horizontal row for separation -->
+
+<div class="mb-3 w-50 mx-auto">
+    <div class="col-md-12">
+        <form method="get">
+            <button asp-controller="Product" asp-action="ListProdByCat" asp-route-id="@product.Category"
+            class="btn btn-primary mb-1" style="float: right">Back</button>
+        </form>
+
+        <form method="post" asp-controller="Photo" asp-action="UploadPhotos"
+              enctype="multipart/form-data">
+            
+            <div class="mb-2">
+                <!--<label class="form-label text-primary">@product.Id</label>-->
+                <input type="number" name="id" value="@product.Id" class="form-control" readonly />
+            </div>
+          
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="file" name="MultiplePhotos" multiple accept=".jpg,.png,.gif" class="form-control" />
+            <div class="d-grid">
+                <button type="submit" name="Upload" class="btn btn-primary mb-2">Upload</button>
+            </div>
+        
+        </form>
+    </div>
+</div>

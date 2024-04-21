@@ -43,6 +43,7 @@ builder.Services.AddSingleton(emailConfig);
 
 //builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<PhotoService, PhotoService>();
 //
 builder.Services.AddSingleton<ChargeService>(new ChargeService());
 builder.Services.AddSingleton<TransactionService>(new TransactionService());

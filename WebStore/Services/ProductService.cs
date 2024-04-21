@@ -25,6 +25,7 @@ namespace WebStore.Services
                 Price = model.Price,
                 Description = model.Description,
                 Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault(),
+                Quantity = model.Quantity,
                 isDeleted = false
             };
             context.Products.Add(product);
@@ -46,13 +47,15 @@ namespace WebStore.Services
                 Name = x.Name,
                 Price = x.Price,
                 Description = x.Description,
+                Photos = x.Photos,
                 Reviews = context.Reviews.Where(y => y.Product.Id == x.Id && !y.isDeleted).Select(y => new Review
                 {
                     Id = y.Id,
                     Description = y.Description,
                     Owner = y.Owner
                 }).ToList(),
-                Category = x.Category.Name
+                Category = x.Category.Name,
+                Quantity = x.Quantity,
             }).FirstOrDefault();
         }
         public ProductFormModel GetAdById(int id)
@@ -63,8 +66,8 @@ namespace WebStore.Services
                 Name = product.Name,
                 Description = product.Description,
                 Category = product.Category.Id,
-                Price = product.Price
-
+                Price = product.Price,
+                Quantity = product.Quantity,
             }).FirstOrDefault();
         }
 
@@ -74,6 +77,7 @@ namespace WebStore.Services
             ad.Description = model.Description;
             ad.Name = model.Name;
             ad.Price = model.Price;
+            ad.Quantity = model.Quantity;
             ad.Category = context.Categories.Where(x => x.Id == model.Category).FirstOrDefault();
             this.context.SaveChanges();
         }
@@ -81,6 +85,14 @@ namespace WebStore.Services
         {
             var model = this.context.Products.Find(id);
             model.isDeleted = true;
+
+            // Delete photos and reviews for product
+            List<Photo> photos = context.Photos.Where(p => p.ProductId == id).ToList();
+            context.Photos.RemoveRange(photos);
+
+            List<Review> reviews = context.Reviews.Where(r => r.Product.Id == id).ToList();
+            context.Reviews.RemoveRange(reviews);
+
             this.context.SaveChanges();
         }
 
@@ -93,22 +105,47 @@ namespace WebStore.Services
                 Description = x.Description,
                 Name = x.Name,
                 Price = x.Price,
+                Quantity = x.Quantity,
             }).ToListAsync();
         }
 
         public List<ProductFormModel> GetProductByName(string productName)
         {
             List<ProductFormModel> products = context.Products
-                .Where(p => p.Name == productName && !p.isDeleted)
+                //.Where(p => p.Name == productName && !p.isDeleted)
+                .Where(p => !p.isDeleted && p.Name.Contains(productName))
                 .Select(x => new ProductFormModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Category = x.Category.Id,
-                Price = x.Price,
-                Reviews = x.Reviews
-            }).ToList(); 
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Category = x.Category.Id,
+                    Price = x.Price,
+                    Quantity = x.Quantity,
+                    //Reviews = x.Reviews,
+                    Reviews = context.Reviews.Where(r => !r.isDeleted && r.Product.Id == x.Id).ToList(),
+                    Photos = context.Photos.Where(p => p.ProductId == x.Id).ToList(),
+                }).ToList(); 
+            return products;
+        }
+
+        public List<ProductFormModel> GetProdsByCat(int catId)
+        {
+            List<ProductFormModel> products = context.Products
+                //.Where(p => p.Name == productName && !p.isDeleted)
+                .Where(p => !p.isDeleted && p.Category.Id == catId)
+                .Select(x => new ProductFormModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Category = x.Category.Id,
+                    Price = x.Price,
+                    Quantity = x.Quantity,
+                    //Reviews = x.Reviews,
+                    Reviews = context.Reviews.Where(r => !r.isDeleted && r.Product.Id == x.Id).ToList(),
+                    Photos = context.Photos.Where(p => p.ProductId == x.Id).ToList(),
+                }).ToList();
             return products;
         }
     }

@@ -27,8 +27,10 @@ namespace WebStore.Services
             foreach (var element in model.Items)
             {
                 var product = context.CartItems.Where(x => x.Id == element.Id).Include(x=> x.product).FirstOrDefault();
+                
                 var item = model.Items.Where(x => x.Id == element.Id).FirstOrDefault();
                 item.product = product.product;
+                
             };
             return model;
         }

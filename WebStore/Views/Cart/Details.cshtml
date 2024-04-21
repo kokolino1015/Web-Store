@@ -18,8 +18,26 @@
                             @*<li class="list-group-item">
                         <span class="fw-bold">Category: </span> @Model.Name
                         </li>*@
-                            <li class="list-group-item"><span class="fw-bold">Name: </span>@items.product.Name - @items.Quantity</li>
-                            <li class="list-group-item"><span class="fw-bold">Description: </span> @(items.product.Description?.Substring(0, Math.Min(items.product.Description.Length, 10)) + (items.product.Description?.Length > 10 ? "..." : ""))
+                            
+                            
+                        <li class="list-group-item"><span class="fw-bold">Name: </span>@items.product.Name - @items.Quantity</li>
+                            @foreach (var photo in items.product.Photos)
+                            {
+                                <tr>
+
+                                    @{
+                                        var base64Image = Convert.ToBase64String(photo.Bytes);
+                                        var image = String.Format($"data:image/{photo.FileExtension};base64,{base64Image}");
+
+                                    }
+                                    <td class="text-center align-middle">
+                                        <img src="@image" alt="No image" height="100" width="100" class="img-fluid">
+                                    </td>
+
+
+                                </tr>
+                            }
+                        <li class="list-group-item"><span class="fw-bold">Description: </span> @(items.product.Description?.Substring(0, Math.Min(items.product.Description.Length, 10)) + (items.product.Description?.Length > 10 ? "..." : ""))
                                 <a asp-controller="Cart" asp-action="Add" asp-route-id="@items.product.Id" class="btn btn-primary mb-2">+</a>
                                 <a asp-controller="Cart" asp-action="Remove" asp-route-id="@items.product.Id" class="btn btn-primary mb-2">-</a>
                             </li>

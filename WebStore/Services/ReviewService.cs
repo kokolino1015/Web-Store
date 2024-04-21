@@ -59,5 +59,21 @@ namespace WebStore.Services
             context.SaveChanges();
             return review.Product.Id;
         }
+
+        public List<ReviewViewModel> GetProductReviews(int productId)
+        {
+            List<ReviewViewModel> reviews = context.Reviews
+                .Where(x => x.Product.Id == productId && !x.isDeleted)
+                .Select(x => new ReviewViewModel()
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    Product = x.Product.Id,
+                    //Owner = new ApplicationUser { Email = x.Owner },
+                    Owner = context.Users.Where(u => u.Id == x.Owner).FirstOrDefault()
+                }).ToList();
+
+            return reviews;
+         }
     }
 }

@@ -15,11 +15,13 @@ namespace WebStore.Controllers
     {
         private readonly CommonService commonService;
         private readonly ReviewService reviewService;
-        public ReviewController(CommonService commonService, ReviewService reviewService):base(commonService)
+        private readonly ProductService productService;
+        public ReviewController(CommonService commonService, ReviewService reviewService, ProductService productService):base(commonService)
         {
             
             this.commonService = commonService;
             this.reviewService = reviewService;
+            this.productService = productService;
         }
         [Authorize]
         [HttpGet]
@@ -59,6 +61,15 @@ namespace WebStore.Controllers
         {
             int id = reviewService.Delete(model);
             return Redirect($"/Product/Details/{id}");
+        }
+
+        [HttpGet("/Review/ListProductReviews/{id}")]
+        public IActionResult ListProductReviews(int id)
+        {
+            List<ReviewViewModel> reviews = reviewService.GetProductReviews(id);
+            ViewData["ProductName"] = productService.GetAdById(id).Name;
+            ViewData["CategoriesList"] = productService.GetCategories();
+            return View(reviews);
         }
     }
 }

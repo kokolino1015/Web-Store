@@ -1,4 +1,6 @@
-﻿using MailKit;
+﻿
+
+using MailKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data.Entities;
@@ -161,7 +163,7 @@ namespace WebStore.Controllers
             }
         }
 
-
+        //return Redirect($"/Product/Details/{model.Product}");
         [HttpGet("/Product/Details/{id}")]
         public IActionResult Details(int id)
         {
@@ -176,29 +178,20 @@ namespace WebStore.Controllers
         //[HttpPost]
         //public IActionResult ListProdByCat(CategoryFormModel category)
 
-        [HttpPost]
-        public IActionResult ListProdByCat(int catId)
+        [HttpGet]
+        //[HttpPost]
+        public IActionResult ListProdByCat(int id)
         {
-            List<ProductFormModel> products = categoryService.
-                GetAllIdByCategoryId(catId)
-                .Select(p => new ProductFormModel 
-                { 
-                    Id=p.Id, 
-                    Name=p.Name, 
-                    Description=p.Description, 
-                    //Category=p.Category, 
-                    Price=p.Price,
-                    Reviews=p.Reviews
-                }).ToList();
+            List<ProductFormModel> products = productService.GetProdsByCat(id);
 
-            ViewData["CategoryId"] = catId;
-            ViewData["CategoryName"] = categoryService.GetCategoryById(catId).Name;
+            ViewData["CategoryId"] = id;
+            ViewData["CategoryName"] = categoryService.GetCategoryById(id).Name;
             //ViewData["ProductsList"] = products;
 
             return View("ListProdByCat", products);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> ListProdByName(string productName)
         {
             if (string.IsNullOrWhiteSpace(productName))

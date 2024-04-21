@@ -31,8 +31,8 @@ namespace WebStore.Migrations
                 columns: new[] { "id", "concurrency_stamp", "name", "normalized_name" },
                 values: new object[,]
                 {
-                    { "59c6cb87-d205-4ed3-98c3-cbe7d171afc0", "5b679292-4515-48b2-a035-af6e86c52345", "Employee", "EMPLOYEE" },
-                    { "96311aef-454a-47f9-bc37-cd8665d740ca", "96311aef-454a-47f9-bc37-cd8665d740ca", "Admin", "ADMIN" }
+                    { "4ca3148a-cb03-4482-b56a-073929909a8f", "9a569935-99c4-4e1d-9724-74f2eebd5e83", "Employee", "EMPLOYEE" },
+                    { "c3cdb8ca-c56c-4e62-8ff7-8b77f071454e", "c3cdb8ca-c56c-4e62-8ff7-8b77f071454e", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -43,12 +43,12 @@ namespace WebStore.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "id", "access_failed_count", "cart_id", "concurrency_stamp", "email", "email_confirmed", "first_name", "last_name", "lockout_enabled", "lockout_end", "normalized_email", "normalized_user_name", "password_hash", "phone_number", "phone_number_confirmed", "role_id", "security_stamp", "two_factor_enabled", "user_name" },
-                values: new object[] { "63d64290-a4d8-4242-ac3e-2391f5a0b0aa", 0, 1, "72c5eb9b-cfd9-416c-ad4c-d83e012cff8f", "admin@webshop.com", true, null, null, false, null, "ADMIN@WEBSHOP.COM", "ADMIN@WEBSHOP.COM", "AQAAAAEAACcQAAAAEGlUnkT1rO/RVAalH8QrIlbpjvwBauDI+HLFWBdxmoPHOuOYIDUHaFQfT/XZ/GTZag==", null, false, null, "c0c671a1-0b9a-43f1-be33-fd237b520e8e", false, "admin@webshop.com" });
+                values: new object[] { "b0a482ae-b1a0-4584-abbd-bc9f27c76eb3", 0, 1, "cbfa1742-4fde-4dfd-9de9-c7d0fe7a0c1e", "admin@webshop.com", true, null, null, false, null, "ADMIN@WEBSHOP.COM", "ADMIN@WEBSHOP.COM", "AQAAAAEAACcQAAAAEGIZOP1WMExjR6GCe6XwZwk5maMn0ao7EG8m584KvlCGOqzcfvuEL6zjzyd36HSJMA==", null, false, null, "7fb5fb4d-7f7b-4ebf-a64e-773d7ee86752", false, "admin@webshop.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "role_id", "user_id" },
-                values: new object[] { "96311aef-454a-47f9-bc37-cd8665d740ca", "63d64290-a4d8-4242-ac3e-2391f5a0b0aa" });
+                values: new object[] { "c3cdb8ca-c56c-4e62-8ff7-8b77f071454e", "b0a482ae-b1a0-4584-abbd-bc9f27c76eb3" });
 
             migrationBuilder.AddForeignKey(
                 name: "fk_asp_net_users_carts_cart_id",
@@ -69,22 +69,22 @@ namespace WebStore.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "id",
-                keyValue: "59c6cb87-d205-4ed3-98c3-cbe7d171afc0");
+                keyValue: "4ca3148a-cb03-4482-b56a-073929909a8f");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "role_id", "user_id" },
-                keyValues: new object[] { "96311aef-454a-47f9-bc37-cd8665d740ca", "63d64290-a4d8-4242-ac3e-2391f5a0b0aa" });
+                keyValues: new object[] { "c3cdb8ca-c56c-4e62-8ff7-8b77f071454e", "b0a482ae-b1a0-4584-abbd-bc9f27c76eb3" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "id",
-                keyValue: "96311aef-454a-47f9-bc37-cd8665d740ca");
+                keyValue: "c3cdb8ca-c56c-4e62-8ff7-8b77f071454e");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "id",
-                keyValue: "63d64290-a4d8-4242-ac3e-2391f5a0b0aa");
+                keyValue: "b0a482ae-b1a0-4584-abbd-bc9f27c76eb3");
 
             migrationBuilder.DeleteData(
                 table: "carts",

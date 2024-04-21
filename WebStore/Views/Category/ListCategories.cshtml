@@ -3,8 +3,28 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "All Categories";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+
 }
 <h5 class="text-center text-primary font-weight-bold">All Categories</h5>
+
+@if (!string.IsNullOrWhiteSpace(@successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>@successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+<div class="alert alert-success">
+    <strong>Error! </strong>@errorMessage
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+</div>
+}
+
 
 @if (Model.Any())
 {

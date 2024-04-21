@@ -17,7 +17,7 @@
     </div>
 }
 
-<form method="get" asp-controller="Product" asp-action="ListProdByName">
+<form method="post" asp-controller="Product" asp-action="ListProdByName">
     <div class="mb-3 w-50 mx-auto">
         <!-- <label asp-for="Id" class="form-label">ID</label>
         <input asp-for="Id" class="form-control" aria-required="true" />             
@@ -54,12 +54,12 @@
 <hr />        
 <h5 class="text-center text-primary font-weight-bold">List Products By Category</h5>
   
-<form asp-controller="Product" asp-action="ListProdByCat" method="post">            
+<form asp-controller="Product" asp-action="ListProdByCat" method="get">            
     <div class="mb-2 w-50 mx-auto">                
         <!--<label asp-for="Id" class="form-label">Select Category</label> -->               
         <!--<select asp-for="Id" class="form-control"> -->                
         <label class="form-label text-primary">Select Category</label>
-        <select name="catId" class="form-control">
+        <select name="id" class="form-control">
             @*@foreach (var category in ViewData["Categories"] as List<CategoryFormModel>)*@                    
             @foreach (var category in Model)
             {                                            

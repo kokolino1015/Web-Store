@@ -1,0 +1,78 @@
+﻿@using WebStore.Data.Entities
+@using WebStore.Models.ReviewModel
+@model List<ReviewViewModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "List Product Reviews";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+    //var products = ViewData["ProductsList"] as List<ProductFormModel>;
+
+    var categories = ViewData["CategoriesList"] as List<Category>;
+}
+
+<h5 class="text-center text-primary font-weight-bold">@ViewData["Title"]:</h5>
+<h5 class="text-center text-dark font-weight-bold">@ViewData["ProductName"]</h5>
+<hr />  <!-- Horizontal row for separation -->
+@if (!string.IsNullOrWhiteSpace(@successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>@successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<form>
+    <button asp-controller="Product" asp-action="Index" class="btn btn-primary mb-1" style="float: right">Back</button>
+    
+    <table class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr class="table-active">
+                <th class="text-center">Id</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">User</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (ReviewViewModel review in Model)
+                {
+                    <tr>
+                        <td class="text-center">@review.Id</td>
+                        <td>@review.Description</td>
+                        <td class="text-center">@review.Owner.Email</td>
+
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Review" asp-action="Edit" asp-route-id="@review.Id"
+                                   class="btn btn-primary">Edit</a>
+                                <a asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id"
+                                   class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div>
+                            No reviews available for this product!
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

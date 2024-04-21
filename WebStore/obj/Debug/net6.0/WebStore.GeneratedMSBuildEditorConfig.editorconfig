@@ -120,6 +120,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Photo/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Photo/ListProductPhotos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9cTGlzdFByb2R1Y3RQaG90b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Photo/UploadPhotos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9cVXBsb2FkUGhvdG9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Product/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -162,6 +174,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Review/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Review/ListProductReviews.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XExpc3RQcm9kdWN0UmV2aWV3cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Kaloyan/Desktop/ИТ МОН/ИТ МОН 2023-24/WebStoreEmail/Web-Store/WebStore/Views/Shared/Error.cshtml]

@@ -91,25 +91,6 @@ namespace WebStore.Controllers
             return View(roles);
         }
 
-        // Find role by id
-        [HttpGet]
-        public async Task<IActionResult> EditRole(string roleId)
-        {
-            //First Get the role information from the database
-            IdentityRole role = await roleManager.FindByIdAsync(roleId);
-            if (role == null)
-            {
-                // Handle the scenario when the role is not found
-                return View("Error");
-            }
-            //Populate the EditRoleViewModel from the data retrived from the database
-            var model = new EditRoleViewModel
-            {
-                Id = role.Id,
-                RoleName = role.Name
-            };
-            return View(model);
-        }
 
         // Find role by name
         [HttpPost]
@@ -126,6 +107,27 @@ namespace WebStore.Controllers
             IdentityRole role = await roleManager.FindByNameAsync(roleName);
             if (role == null)
             {
+                return View("Error");
+            }
+            //Populate the EditRoleViewModel from the data retrived from the database
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name
+            };
+            return View(model);
+        }
+
+
+        // Find role by id
+        [HttpGet]
+        public async Task<IActionResult> EditRole(string roleId)
+        {
+            //First Get the role information from the database
+            IdentityRole role = await roleManager.FindByIdAsync(roleId);
+            if (role == null)
+            {
+                // Handle the scenario when the role is not found
                 return View("Error");
             }
             //Populate the EditRoleViewModel from the data retrived from the database
@@ -170,6 +172,7 @@ namespace WebStore.Controllers
 
             return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string roleId)
